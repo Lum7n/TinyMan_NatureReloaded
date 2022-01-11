@@ -1,0 +1,19 @@
+{
+  "name": "tinyman_paperchase",
+  "version": "1.0.0",
+  "description": "Miro: https://miro.com/welcomeonboard/n2NS3cnjFLzG0HbvtnAQUfgTwTlPBY7gfsb4ehV0uoFscTEhuPIgHvORj8w6qPmn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lum7n/TinyMan_Hide-n-Seek.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lum7n/TinyMan_Hide-n-Seek/issues"
+  },
+  "homepage": "https://github.com/Lum7n/TinyMan_Hide-n-Seek#readme"
+}
