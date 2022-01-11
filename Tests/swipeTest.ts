@@ -2,14 +2,14 @@ namespace SwipeTest {
 
     window.addEventListener("load", handleLoad);
 
-   
-    function handleLoad():void{
 
-        var container: Element = <Element>document.querySelector("body");
+    function handleLoad(): void {
 
-        container.addEventListener("touchstart", startTouch, false);
-        container.addEventListener("touchmove", moveTouch, false);
-    
+       // var container: Element = <Element>document.querySelector("body");
+
+        document.addEventListener("touchstart", startTouch, false);
+        document.addEventListener("touchmove", moveTouch, false);
+
 
     }
 
@@ -23,6 +23,8 @@ namespace SwipeTest {
     };
 
     function moveTouch(e: any) {
+
+        console.log("sth touched wow");
         if (initialX === null) {
             return;
         }
@@ -31,13 +33,13 @@ namespace SwipeTest {
             return;
         }
 
-        var currentX = e.touches[0].clientX;
-        var currentY = e.touches[0].clientY;
+        var currentX: any = e.touches[0].clientX;
+        var currentY: any = e.touches[0].clientY;
 
         var diffX = initialX - currentX;
         var diffY = initialY - currentY;
 
-        if (Math.abs(diffX) > Math.abs(diffY)) {
+      /*  if (Math.abs(diffX) > Math.abs(diffY)) {
             // sliding horizontally
             if (diffX > 0) {
                 // swiped left
@@ -55,12 +57,22 @@ namespace SwipeTest {
                 // swiped down
                 console.log("swiped down");
             }
+        }*/
+    
+        // sliding vertically
+        if (diffY > 0) {
+            // swiped up
+            console.log("swiped up");
+        } else {
+            // swiped down
+            console.log("swiped down");
         }
+        
 
         initialX = null;
         initialY = null;
 
-        e.preventDefault();
+      //  e.preventDefault();
 
     }
-};
+}
