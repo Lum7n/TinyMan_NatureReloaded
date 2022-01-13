@@ -15,6 +15,10 @@ namespace SwipeTest {
         vibrate();
     }
 
+    let answer: boolean = false;
+    let initialX: any = null;
+    let initialY: any = null;
+
     function vibrate(): void {
         if ("vibrate" in navigator) {
             console.log("Vibration supported");
@@ -25,9 +29,7 @@ namespace SwipeTest {
         navigator.vibrate(1000);
     }
 
-    // Swipe Up / Down / Left / Right
-    let initialX: any;
-    let initialY: any;
+
 
     //gibt Koordinaten des touchpoints wieder
     function startTouch(e: any): void {
@@ -36,51 +38,47 @@ namespace SwipeTest {
         console.log(initialX, initialY, e.touches[0]);
     }
 
-    function moveTouch(e: any) {
+    function moveTouch(e: any): void {
 
-        //   let currentX: any = e.touches[0].clientX;
+        let currentX: any = e.touches[0].clientX;
         let currentY: any = e.touches[0].clientY;
-        // let diffX: number = initialX - currentX;
+        let diffX: number = initialX - currentX;
         let diffY: number = initialY - currentY;
 
-        // sliding vertically
-        if (diffY > 0) {
-            // swiped up
-            console.log("swiped up");
-        } else {
-            // swiped down
-            console.log("swiped down");
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // sliding horizontally
+            if (diffX > 0) {
+                // swiped left
+                console.log("swiped left");
+                answer = false;
+                //  console.log(answer);
+            } else {
+                // swiped right
+                console.log("swiped right");
+                answer = true;
+                //console.log(answer);
+            }
+            /*  } else {
+                  // sliding vertically
+                  if (diffY > 0) {
+                      // swiped up
+                      console.log("swiped up");
+                  } else {
+                      // swiped down
+                      console.log("swiped down");
+                  }
+              }*/
         }
 
-        //  initialX = null;
-        //  initialY = null;
 
-        //e.preventDefault();
 
     }
 
-    function endTouch(e: any){
 
-     
+    function endTouch(e: any): void {
 
-        /* //  let endX: any = e.touches[0].clientX;
-        let endY: any = e.touches[0].clientY;
-        let answer: boolean = false;
-        let diff: number = endY - initialY;
+        console.log(answer);
 
-        if (diff > 0) {
-            console.log("swipe up", answer);
-
-        } else {
-            console.log("swipe down", answer);
-        }
-
-        console.log(endY, diff);
-        console.log("end of touch");*/
-
-    
     }
-
-
 
 }
