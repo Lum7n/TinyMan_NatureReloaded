@@ -3,14 +3,14 @@ var SwipeTest;
 (function (SwipeTest) {
     // let answer: boolean = handleTouchmove(); zeigt dann an ob swipe up oder swipe down
     // mit der move großen move funktion zurückgeben - return
+    let answer;
     window.addEventListener("load", handleLoad);
     function handleLoad() {
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", moveTouch, false);
         document.addEventListener("touchend", endTouch);
-        vibrate();
+        answer = endTouch();
     }
-    let answer = false;
     let initialX = null;
     let initialY = null;
     function vibrate() {
@@ -30,6 +30,7 @@ var SwipeTest;
         console.log(initialX, initialY, e.touches[0]);
     }
     function moveTouch(e) {
+        vibrate();
         let currentX = e.touches[0].clientX;
         let currentY = e.touches[0].clientY;
         let diffX = initialX - currentX;
@@ -60,8 +61,9 @@ var SwipeTest;
               }*/
         }
     }
-    function endTouch(e) {
+    function endTouch() {
         console.log(answer);
+        return answer;
     }
 })(SwipeTest || (SwipeTest = {}));
 //# sourceMappingURL=swipeTest.js.map

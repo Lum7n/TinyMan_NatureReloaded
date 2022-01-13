@@ -2,7 +2,7 @@ namespace SwipeTest {
 
     // let answer: boolean = handleTouchmove(); zeigt dann an ob swipe up oder swipe down
     // mit der move großen move funktion zurückgeben - return
-
+    let answer: boolean;
     window.addEventListener("load", handleLoad);
 
 
@@ -11,11 +11,13 @@ namespace SwipeTest {
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", moveTouch, false);
         document.addEventListener("touchend", endTouch);
+        answer = endTouch();
 
-        vibrate();
+
+    
     }
 
-    let answer: boolean = false;
+
     let initialX: any = null;
     let initialY: any = null;
 
@@ -39,6 +41,8 @@ namespace SwipeTest {
     }
 
     function moveTouch(e: any): void {
+
+        vibrate();
 
         let currentX: any = e.touches[0].clientX;
         let currentY: any = e.touches[0].clientY;
@@ -75,9 +79,10 @@ namespace SwipeTest {
     }
 
 
-    function endTouch(e: any): void {
+    function endTouch(): boolean {
 
         console.log(answer);
+        return answer;
 
     }
 
