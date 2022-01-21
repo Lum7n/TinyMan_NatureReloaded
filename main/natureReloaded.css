@@ -1,0 +1,48 @@
+
+button{
+    text-align: center;;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 20px;
+    background-color: #e2dd96;
+    box-shadow: 0 4px #999;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+#startButton{
+    display: block;
+}
+
+#tipp1{
+
+    display: none;
+}
+
+#tipp2{
+
+    display: none;
+}
+
+#warning{
+    display: none;
+}
+
+#pauseIcon{
+    width: 5%;
+    display: none;
+    cursor: pointer;
+
+}
+
+#playIcon{
+    width: 5%;
+    display: none;
+    cursor: pointer;
+
+}
