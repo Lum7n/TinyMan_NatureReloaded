@@ -1,11 +1,14 @@
+body{
+    font-family: 'Amatic SC', cursive;
+}
 
 button{
     text-align: center;;
     padding: 15px 25px;
-    font-size: 24px;
+    font-size: 30px;
     cursor: pointer;
-    font-family: 'Courier New', Courier, monospace;
-    border-radius: 20px;
+    font-family: inherit;
+    border-radius: 25px;
     background-color: #e2dd96;
     box-shadow: 0 4px #999;
     text-align: center;
