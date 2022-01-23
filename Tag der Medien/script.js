@@ -9,7 +9,7 @@ var Tag_der_Medien;
     function backgroundSize() {
         let mainContent = document.querySelector(".main");
         let heightContent = mainContent.offsetHeight;
-        heightContent = heightContent + 180;
+        heightContent = heightContent + 150;
         console.log(heightContent);
         let css = ".block_1:after{ height: " + heightContent + "px }";
         console.log(css);

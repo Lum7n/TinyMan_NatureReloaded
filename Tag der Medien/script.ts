@@ -14,7 +14,7 @@ namespace Tag_der_Medien {
         let mainContent: HTMLElement = <HTMLElement>document.querySelector(".main");
         let heightContent: number = mainContent.offsetHeight;
 
-        heightContent = heightContent + 180;
+        heightContent = heightContent + 150;
         console.log(heightContent);
 
         let css: string = ".block_1:after{ height: " + heightContent + "px }";
