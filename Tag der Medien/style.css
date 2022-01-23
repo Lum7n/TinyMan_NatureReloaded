@@ -45,6 +45,8 @@ body {
     left: 50%;
     transform: translate(-50%, 0%);
     text-align: justify;
+    max-height: fit-content;
+
 }
 
 #logo {
@@ -96,5 +98,4 @@ a:visited {
 #end {
     position: absolute;
     font-size: medium;
-    bottom: -4%;
 }
