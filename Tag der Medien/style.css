@@ -1,7 +1,8 @@
 body {
     background-color: #bcd881;
-    font-family: 'Amatic SC', cursive, Arial, Helvetica, sans-serif;
-    font-size: 1em;
+    font-family: 'Source Code Pro', monospace, 'Courier New', Courier;
+    /* font-family: 'Amatic SC', cursive, Helvetica, sans-serif; */
+    font-size: 1.3em;
 }
 
 .block_1 {
@@ -25,7 +26,28 @@ body {
     z-index:1;
     margin: 0;
     position: absolute;
-    top: 30%;
+    top: 50px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
+    text-align: justify;
+}
+
+#logo {
+    padding: 0% 20% 10% 20%;
+}
+
+#character {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5% 0%;
+    width: 85%;
+}
+
+a {
+    color: palevioletred;
+}
+
+a:visited {
+    color: palegreen;
 }
