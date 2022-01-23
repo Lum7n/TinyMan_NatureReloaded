@@ -1,7 +1,11 @@
 body {
     background-color: #bcd881;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Amatic SC', cursive, Arial, Helvetica, sans-serif;
     font-size: 1em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .block_1 {
@@ -20,9 +24,8 @@ body {
     background: linear-gradient(to left, #b38c6886, #bcd88186);
 }
 
-.block h1{
+.main {
     color:#000000;
-    position:relative;
+    position: relative;
     z-index:1;
-  }
-  
+}
