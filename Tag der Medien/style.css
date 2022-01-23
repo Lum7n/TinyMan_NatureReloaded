@@ -2,10 +2,6 @@ body {
     background-color: #bcd881;
     font-family: 'Amatic SC', cursive, Arial, Helvetica, sans-serif;
     font-size: 1em;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
 }
 
 .block_1 {
@@ -26,6 +22,10 @@ body {
 
 .main {
     color:#000000;
-    position: relative;
     z-index:1;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
