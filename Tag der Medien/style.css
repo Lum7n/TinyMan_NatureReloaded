@@ -18,7 +18,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 200%;
+    height: 400%;
     z-index: 0;
     background: linear-gradient(to left, #b38c6886, #bcd88186);
 }
@@ -51,7 +51,7 @@ body {
     padding: 0% 20% 10% 20%;
 }
 
-#character {
+.pictures {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -61,8 +61,40 @@ body {
 
 a {
     color: #f6f6ca;
+    text-decoration: none;
 }
 
 a:visited {
     color: #c9691b;
+    text-decoration: none;
+}
+
+#atmo {
+    position: absolute;
+    padding-top: 2.2%;
+    width: 85%;
+}
+
+#speaker_left {
+    position: relative;
+    width: 12%;
+    top: 2px;
+}
+
+#speaker_right {
+    position: relative;
+    width: 12%;
+    top: 2px;
+    left: 73%;
+    transform: rotate(180deg);
+}
+
+#youDecide {
+    width: 50%;
+}
+
+#end {
+    position: absolute;
+    font-size: medium;
+    bottom: -4%;
 }
