@@ -60,10 +60,21 @@ var SwipeTest;
                   }
               }*/
         }
+        console.log("touchmove", answer);
     }
     function endTouch() {
-        console.log(answer);
+        console.log("endTOUCH", answer);
         return answer;
     }
+    /*function myDisplayer(some: number): void {
+        console.log(some);
+    }
+
+    function myCalculator(num1: number, num2: number, myCallback: CallableFunction): void {
+        let sum: number = num1 + num2;
+        myCallback(sum);
+    }
+
+    myCalculator(5, 5, myDisplayer);*/
 })(SwipeTest || (SwipeTest = {}));
 //# sourceMappingURL=swipeTest.js.map

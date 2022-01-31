@@ -74,6 +74,7 @@ namespace SwipeTest {
               }*/
         }
 
+        console.log("touchmove", answer);
 
 
     }
@@ -81,9 +82,20 @@ namespace SwipeTest {
 
     function endTouch(): boolean {
 
-        console.log(answer);
+        console.log("endTOUCH", answer);
         return answer;
 
     }
 
+    /*function myDisplayer(some: number): void {
+        console.log(some);
+    }
+
+    function myCalculator(num1: number, num2: number, myCallback: CallableFunction): void {
+        let sum: number = num1 + num2;
+        myCallback(sum);
+    }
+
+    myCalculator(5, 5, myDisplayer);*/
+  
 }
