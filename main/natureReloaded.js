@@ -2,17 +2,41 @@
 var NatureReloaded;
 (function (NatureReloaded) {
     window.addEventListener("load", handleLoad);
+    //to count atmo-points
     let a = 0;
+    //set last answer 
     let lastA = true;
+    //swipe left = no/false, swipe right = yes/true
     let answer;
+    //start-coordinates of touch
     let initialX = null;
     let initialY = null;
+    //atmos
     let atmoGreen = new Audio("/audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
     let atmoRed = new Audio("/audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    //all audio clips 
+    let prologue1Q = new Audio("/audios/prologue+question_placeh.ogg");
+    let prologueAnswerYes = new Audio("/audios/prologue_answerYes_placeh.ogg");
+    let prologueAnswerNo = new Audio("/audios/prologue_answerNo_placeh.ogg");
+    let prologue2 = new Audio("/audios/rest_of_prologue_placeh.ogg");
+    let scene2Q = new Audio("/audios/scene2+question_placeh.ogg");
+    let scene2AnswerYes = new Audio("/audios/scene2_answerYes_placeh.ogg");
+    let scene2AnswerNo = new Audio("/audios/scene2_answerNo_placeh.ogg");
+    let scene3Q1 = new Audio("/audios/scene3+question1_placeh.ogg");
+    let scene3PositiveVQ2 = new Audio("/audios/scene3_positiveArguments_placeh.ogg");
+    let scene3NegativeVQ2 = new Audio("/audios/scene3_negativeArguments_placeh.ogg");
+    let scene3BothVQ2 = new Audio("/audios/scene3_neutralArguments_placeh.ogg");
+    let scene3AnswerYes = new Audio("/audios/scene3_answerYes_placeh.ogg");
+    let scene3AnswerNo = new Audio("/audios/scene3_answerNo_placeh.ogg");
+    let scene4PositiveV = new Audio("/audios/scene4_positiveSide_placeh.ogg");
+    let scene4NegativeV = new Audio("/audios/scene4_negativeSide_placeh.ogg");
+    let allAudio;
+    //Start-Buttons
     let startButton;
     let buttonTipp1;
     let buttonTipp2;
     let buttonWarning;
+    //Pause/Play-Imgs
     let playIcon;
     let pauseIcon;
     function handleLoad() {
@@ -24,7 +48,7 @@ var NatureReloaded;
         pauseIcon = document.querySelector("#pauseIcon");
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
-        //  pauseIcon.addEventListener("click", handlePlayPause);
+        pauseIcon.addEventListener("click", handlePlayPause);
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", handleTouchmove, false);
         document.addEventListener("touchend", endTouch);
@@ -58,29 +82,106 @@ var NatureReloaded;
     }
     function playS1Prologue() {
         console.log("start Prologue");
-        // play prologue and ask question
-        //vibrate();
-        // handleTouch();
+        prologue1Q.play();
+        //somehow wait for swipe of user
+        answer = endTouch(); //?
+        if (answer == true) {
+            prologueAnswerYes.play();
+            console.log("audio answer yes");
+        }
+        else {
+            prologueAnswerNo.play();
+            console.log("audio answer no");
+        }
+        prologue2.play();
+        console.log("rest of prologue");
+        prologue2.addEventListener("ended", playS2Hunting);
+        console.log("End of prologue");
+    }
+    function playS2Hunting() {
         atmoGreen.play();
-        atmoGreen.addEventListener("ended", handleTouch);
-        /* console.log("play prologue ans ask question");
-         // vibrate();
-         answer = endTouch();
-         if (answer == true) {
-             //play audio clip for answer yes
-             console.log("audio answer yes");
-         } else {
-             //play audio clip for answer no
-             console.log("audio answer no");
-         }
-         //play rest of prologue
-         console.log("rest of prologue");
-         //atmoGreen.addEventListener("ended", playS2Hunting);
-         console.log("Ende S1");*/
+        atmoGreen.volume = 0.5;
+        atmoRed.play();
+        atmoRed.volume = 0.5;
+        scene2Q.play();
+        //somehow wait for swipe of user
+        answer = endTouch(); //?
+        if (answer == true) {
+            scene2AnswerYes.play();
+            a += 1;
+            lastA = true;
+            console.log("audio answer yes", a, lastA);
+            changeAtmo();
+            scene2AnswerYes.addEventListener("ended", playS3SafeEnergy);
+        }
+        else {
+            scene2AnswerNo.play();
+            a -= 1;
+            lastA = false;
+            console.log("audio answer no", a, lastA);
+            changeAtmo();
+            scene2AnswerNo.addEventListener("ended", playS3SafeEnergy);
+        }
     }
-    function handleTouch() {
+    function playS3SafeEnergy() {
+        scene3Q1.play();
+        //somehow wait for swipe of user
+        answer = endTouch(); //?
+        if (answer == true) {
+            a += 1;
+            lastA = true;
+            changeAtmo(); //? ulla
+        }
+        else {
+            a -= 1;
+            lastA = false;
+            changeAtmo(); //? ulla
+        }
+        if (a < 0) {
+            scene3NegativeVQ2.play();
+        }
+        else if (a > 0) {
+            scene3PositiveVQ2.play();
+        }
+        else {
+            scene3BothVQ2.play();
+        }
+        //somehow wait for swipe of user
+        answer = endTouch(); //?
+        if (answer == true) {
+            scene3AnswerYes.play();
+            a -= 1;
+            lastA = false;
+            console.log("audio answer yes", a, lastA);
+            changeAtmo();
+            scene3AnswerYes.addEventListener("ended", playS4Cutscene);
+        }
+        else {
+            scene3AnswerNo.play();
+            a += 1;
+            lastA = true;
+            console.log("audio answer no", a, lastA);
+            changeAtmo();
+            scene3AnswerNo.addEventListener("ended", playS4Cutscene);
+        }
     }
-    //gibt Koordinaten des touchpoints wieder
+    function playS4Cutscene() {
+        if (a > 0) {
+            scene4PositiveV.play();
+        }
+        else if (a < 0) {
+            scene4NegativeV.play();
+        }
+        else {
+            if (lastA == true) {
+                scene4PositiveV.play();
+            }
+            else {
+                scene4NegativeV.play();
+            }
+        }
+    }
+    //gibt Koordinaten der ersten touchpoints wieder
     function startTouch(e) {
         initialX = e.touches[0].clientX;
         initialY = e.touches[0].clientY;
@@ -112,6 +213,16 @@ var NatureReloaded;
         console.log(answer);
         return answer;
     }
+    function changeAtmo() {
+        if (lastA == true) {
+            atmoGreen.volume += 0.1;
+            atmoRed.volume -= 0.1;
+        }
+        else {
+            atmoGreen.volume += 0.1;
+            atmoRed.volume -= 0.1;
+        }
+    }
     function vibrate() {
         if ("vibrate" in navigator) {
             console.log("Vibration supported");
@@ -122,18 +233,11 @@ var NatureReloaded;
         }
         navigator.vibrate(1000);
     }
-    /*function playS2Hunting(): void {
-
-       atmoRed.play();
-
-       console.log("Ende S2");
-
-   }
-
-
-   function handlePlayPause(): void {
-       pauseIcon.style.display = "none";
-       playIcon.style.display = "block";
-   }*/
+    function handlePlayPause() {
+        allAudio = document.getElementsByTagName("audio");
+        console.log(allAudio);
+        pauseIcon.style.display = "none";
+        playIcon.style.display = "block";
+    }
 })(NatureReloaded || (NatureReloaded = {}));
 //# sourceMappingURL=natureReloaded.js.map
