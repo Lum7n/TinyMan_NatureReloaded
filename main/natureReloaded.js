@@ -15,7 +15,7 @@ var NatureReloaded;
     let atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
     let atmoRed = new Audio("https://lum7n.github.io/TinyMan_NatureReloaded/main/audios/mixkit-thunderstorm-in-the-forest-2396.wav");
     //all audio clips 
-    let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
+    // let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
     let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
     let prologueAnswerNo = new Audio("./audios/prologue_answerNo_placeh.ogg");
     let prologue2 = new Audio("./audios/rest_of_prologue_placeh.ogg");
@@ -83,6 +83,7 @@ var NatureReloaded;
               prologue1Q.play();
           });
           */
+        let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
         prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
         //somehow wait for swipe of user
