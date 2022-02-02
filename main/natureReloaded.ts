@@ -14,11 +14,11 @@ namespace NatureReloaded {
     let initialY: any = null;
 
     //atmos
-    let atmoGreen: HTMLAudioElement;
-    let atmoRed: HTMLAudioElement;
+    let atmoGreen: HTMLAudioElement = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+    let atmoRed: HTMLAudioElement = new Audio("https://lum7n.github.io/TinyMan_NatureReloaded/main/audios/mixkit-thunderstorm-in-the-forest-2396.wav");
 
     //all audio clips 
-    let prologue1Q: HTMLAudioElement;
+    let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
     let prologueAnswerYes: HTMLAudioElement = new Audio("./audios/prologue_answerYes_placeh.ogg");
     let prologueAnswerNo: HTMLAudioElement = new Audio("./audios/prologue_answerNo_placeh.ogg");
     let prologue2: HTMLAudioElement = new Audio("./audios/rest_of_prologue_placeh.ogg");
@@ -60,14 +60,6 @@ namespace NatureReloaded {
         buttonWarning = <HTMLButtonElement>document.querySelector("#warning");
         playIcon = <HTMLImageElement>document.querySelector("#playIcon");
         pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
-
-        atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-        atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
-
-        prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
-        body.appendChild(prologue1Q);
-        body.appendChild(atmoGreen);
-        body.appendChild(atmoRed);
 
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
