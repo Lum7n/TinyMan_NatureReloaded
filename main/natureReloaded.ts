@@ -14,11 +14,11 @@ namespace NatureReloaded {
     let initialY: any = null;
 
     //atmos
-    let atmoGreen: HTMLAudioElement = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+    let atmoGreen: HTMLAudioElement;
     let atmoRed: HTMLAudioElement = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
 
     //all audio clips 
-    let prologue1Q: HTMLAudioElement = new Audio("https://lum7n.github.io/TinyMan_NatureReloaded/main/audios/prologue+question_placeh.ogg");
+    let prologue1Q: HTMLAudioElement;
     let prologueAnswerYes: HTMLAudioElement = new Audio("./audios/prologue_answerYes_placeh.ogg");
     let prologueAnswerNo: HTMLAudioElement = new Audio("./audios/prologue_answerNo_placeh.ogg");
     let prologue2: HTMLAudioElement = new Audio("./audios/rest_of_prologue_placeh.ogg");
@@ -59,6 +59,9 @@ namespace NatureReloaded {
         buttonWarning = <HTMLButtonElement>document.querySelector("#warning");
         playIcon = <HTMLImageElement>document.querySelector("#playIcon");
         pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
+
+        atmoGreen= new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+        prologue1Q= new Audio("./audios/prologue+question_placeh.ogg");
 
         document.body.appendChild(prologue1Q);
 
