@@ -13,7 +13,7 @@ var NatureReloaded;
     let initialY = null;
     //atmos
     let atmoGreen;
-    let atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoRed;
     //all audio clips 
     let prologue1Q;
     let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
@@ -48,6 +48,7 @@ var NatureReloaded;
         playIcon = document.querySelector("#playIcon");
         pauseIcon = document.querySelector("#pauseIcon");
         atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+        atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
         prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
         body.appendChild(prologue1Q);
         body.appendChild(atmoGreen);

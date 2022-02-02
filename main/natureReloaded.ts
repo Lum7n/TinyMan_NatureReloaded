@@ -15,7 +15,7 @@ namespace NatureReloaded {
 
     //atmos
     let atmoGreen: HTMLAudioElement;
-    let atmoRed: HTMLAudioElement = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoRed: HTMLAudioElement;
 
     //all audio clips 
     let prologue1Q: HTMLAudioElement;
@@ -62,6 +62,7 @@ namespace NatureReloaded {
         pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
 
         atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+        atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
 
         prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
         body.appendChild(prologue1Q);
