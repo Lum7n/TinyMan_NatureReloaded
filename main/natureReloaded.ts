@@ -134,25 +134,25 @@ namespace NatureReloaded {
 
     async function myPromiseGenerator(): Promise<boolean> {
 
-        return new Promise((resolve, request) => {
-            document.addEventListener("touchend", function (e): void {
+        return new Promise((resolve) => {
+            document.addEventListener("touchend", function (): void {
                 resolve(answer);
 
-            }, { once: true });
+            },                        { once: true });
         });
     }
 
 
     //gibt Koordinaten der ersten touchpoints wieder
-    function startTouch(e: any): void {
+    function startTouch(e: TouchEvent): void {
         initialX = e.touches[0].clientX;
         initialY = e.touches[0].clientY;
         console.log(initialX, initialY, e.touches[0]);
     }
 
-    function handleTouchmove(e: any): void {
-        let currentX: any = e.touches[0].clientX;
-        let currentY: any = e.touches[0].clientY;
+    function handleTouchmove(e: TouchEvent): void {
+        let currentX: number = e.touches[0].clientX;
+        let currentY: number = e.touches[0].clientY;
         let diffX: number = initialX - currentX;
         let diffY: number = initialY - currentY;
 

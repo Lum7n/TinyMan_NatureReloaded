@@ -105,8 +105,8 @@ var NatureReloaded;
         }
     }
     async function myPromiseGenerator() {
-        return new Promise((resolve, request) => {
-            document.addEventListener("touchend", function (e) {
+        return new Promise((resolve) => {
+            document.addEventListener("touchend", function () {
                 resolve(answer);
             }, { once: true });
         });
