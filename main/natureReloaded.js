@@ -77,29 +77,38 @@ var NatureReloaded;
         pauseIcon.style.display = "block";
         playS1Prologue();
     }
-    function playS1Prologue() {
-        console.log("start Prologue");
+    async function playS1Prologue() {
         prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
-        //somehow wait for swipe of user
-        /*   if (userTouched = false) {
-               vibrate();
-           } else {
-               answer = endTouch();
-           }*/
-        answer = endTouch(); //?
-        if (answer == true) {
-            prologueAnswerYes.play();
-            console.log("audio answer yes");
+        while (true) {
+            console.log("Hello there");
+            let answer = await myPromiseGenerator();
+            console.log(answer);
+            if (answer == true) {
+                prologueAnswerYes.play();
+                console.log("audio answer yes");
+                prologueAnswerYes.addEventListener("ended", function () {
+                    prologue2.play();
+                });
+            }
+            else {
+                prologueAnswerNo.play();
+                console.log("audio answer no");
+                prologueAnswerNo.addEventListener("ended", function () {
+                    prologue2.play();
+                });
+            }
+            console.log("rest of prologue");
+            prologue2.addEventListener("ended", playS2Hunting);
+            console.log("End of prologue");
         }
-        else {
-            prologueAnswerNo.play();
-            console.log("audio answer no");
-        }
-        prologue2.play();
-        console.log("rest of prologue");
-        prologue2.addEventListener("ended", playS2Hunting);
-        console.log("End of prologue");
+    }
+    async function myPromiseGenerator() {
+        return new Promise((resolve) => {
+            document.addEventListener("touchend", function (e) {
+                resolve(answer);
+            }, { once: true });
+        });
     }
     //gibt Koordinaten der ersten touchpoints wieder
     function startTouch(e) {

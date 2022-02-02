@@ -98,33 +98,47 @@ namespace NatureReloaded {
         playS1Prologue();
     }
 
-    function playS1Prologue(): void {
-        console.log("start Prologue");
+
+    async function playS1Prologue(): Promise<void> {
 
         prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
 
-        //somehow wait for swipe of user
+        while (true) {
+            console.log("Hello there");
+            let answer: boolean = await myPromiseGenerator();
+            console.log(answer);
 
-        /*   if (userTouched = false) {
-               vibrate();
-           } else {
-               answer = endTouch();
-           }*/
-           
-        answer = endTouch();  //?
+            if (answer == true) {
+                prologueAnswerYes.play();
+                console.log("audio answer yes");
+                prologueAnswerYes.addEventListener("ended", function (): void {
+                    prologue2.play();
+                });
+            } else {
+                prologueAnswerNo.play();
+                console.log("audio answer no");
+                prologueAnswerNo.addEventListener("ended", function (): void {
+                    prologue2.play();
+                });
+            }
 
-        if (answer == true) {
-            prologueAnswerYes.play();
-            console.log("audio answer yes");
-        } else {
-            prologueAnswerNo.play();
-            console.log("audio answer no");
+            console.log("rest of prologue");
+            prologue2.addEventListener("ended", playS2Hunting);
+            console.log("End of prologue");
         }
-        prologue2.play();
-        console.log("rest of prologue");
-        prologue2.addEventListener("ended", playS2Hunting);
-        console.log("End of prologue");
+
+
+    }
+
+    async function myPromiseGenerator(): Promise<boolean> {
+
+        return new Promise((resolve) => {
+            document.addEventListener("touchend", function (e): void {
+                resolve(answer);
+
+            }, { once: true });
+        });
     }
 
 
