@@ -12,11 +12,11 @@ var NatureReloaded;
     let initialX = null;
     let initialY = null;
     //atmos
-    let atmoGreen = new Audio("../audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-    let atmoRed = new Audio("../audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+    let atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
     //all audio clips 
-    // let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
-    let prologueAnswerYes = new Audio("../audios/prologue_answerYes_placeh.ogg");
+    let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
+    let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
     let prologueAnswerNo = new Audio("../audios/prologue_answerNo_placeh.ogg");
     let prologue2 = new Audio("../audios/rest_of_prologue_placeh.ogg");
     let scene2Q = new Audio("../audios/scene2+question_placeh.ogg");
@@ -40,7 +40,7 @@ var NatureReloaded;
     let playIcon;
     let pauseIcon;
     function handleLoad() {
-        let body = document.querySelector("body");
+        // let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
         startButton = document.querySelector("#startButton");
         buttonTipp1 = document.querySelector("#tipp1");
         buttonTipp2 = document.querySelector("#tipp2");
@@ -83,7 +83,6 @@ var NatureReloaded;
               prologue1Q.play();
           });
           */
-        let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
         prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
         //somehow wait for swipe of user
