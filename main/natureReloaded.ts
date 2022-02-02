@@ -18,7 +18,7 @@ namespace NatureReloaded {
     let atmoRed: HTMLAudioElement = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
 
     //all audio clips 
-    let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
+    let prologue1Q: HTMLAudioElement = new Audio("https://lum7n.github.io/TinyMan_NatureReloaded/main/audios/prologue+question_placeh.ogg");
     let prologueAnswerYes: HTMLAudioElement = new Audio("./audios/prologue_answerYes_placeh.ogg");
     let prologueAnswerNo: HTMLAudioElement = new Audio("./audios/prologue_answerNo_placeh.ogg");
     let prologue2: HTMLAudioElement = new Audio("./audios/rest_of_prologue_placeh.ogg");
