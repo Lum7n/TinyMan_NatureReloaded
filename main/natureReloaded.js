@@ -81,35 +81,137 @@ var NatureReloaded;
         prologue1Q.play();
         console.log("startPrologue");
         prologue1Q.addEventListener("ended", vibrate);
-        while (true) {
-            console.log("Hello there");
-            let answer = await myPromiseGenerator();
-            console.log(answer);
-            if (answer === true) {
-                prologueAnswerYes.play();
-                console.log("audio answer yes");
-                prologueAnswerYes.addEventListener("ended", function () {
-                    prologue2.play();
-                });
-            }
-            else {
-                prologueAnswerNo.play();
-                console.log("audio answer no");
-                prologueAnswerNo.addEventListener("ended", function () {
-                    prologue2.play();
-                });
-            }
-            console.log("rest of prologue");
-            prologue2.addEventListener("ended", playS2Hunting);
-            console.log("End of prologue");
+        console.log("wait for user to swipe");
+        answer = await myPromiseGenerator();
+        console.log(answer);
+        if (answer === true) {
+            console.log("answer yes");
+            prologueAnswerYes.play();
+            prologueAnswerYes.addEventListener("ended", function () {
+                console.log("rest of prologue");
+                prologue2.play();
+                prologue2.addEventListener("ended", playS2Hunting);
+            });
+        }
+        else {
+            console.log("answer no");
+            prologueAnswerNo.play();
+            prologueAnswerNo.addEventListener("ended", function () {
+                console.log("rest of prologue");
+                prologue2.play();
+                prologue2.addEventListener("ended", playS2Hunting);
+            });
         }
     }
-    async function myPromiseGenerator() {
-        return new Promise((resolve) => {
-            document.addEventListener("touchend", function () {
-                resolve(answer);
-            }, { once: true });
-        });
+    async function playS2Hunting() {
+        atmoGreen.play();
+        atmoGreen.volume = 0.5;
+        console.log("start AtmoGreen", atmoGreen.volume);
+        atmoRed.play();
+        atmoRed.volume = 0.5;
+        console.log("start AtmoRed", atmoRed.volume);
+        scene2Q.play();
+        console.log("start scene2 + Q");
+        scene2Q.addEventListener("ended", vibrate);
+        console.log("wait for user to swipe");
+        answer = await myPromiseGenerator();
+        console.log(answer);
+        if (answer == true) {
+            scene2AnswerYes.play();
+            a += 1;
+            lastA = true;
+            changeAtmo();
+            console.log("answer yes", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            scene2AnswerYes.addEventListener("ended", function () {
+                console.log("end of scene2");
+                playS3SafeEnergy();
+            });
+        }
+        else {
+            scene2AnswerNo.play();
+            a -= 1;
+            lastA = false;
+            changeAtmo();
+            console.log("answer no", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            scene2AnswerNo.addEventListener("ended", function () {
+                console.log("end of scene2");
+                playS3SafeEnergy();
+            });
+        }
+    }
+    async function playS3SafeEnergy() {
+        scene3Q1.play();
+        console.log("start Scene 3 + Q");
+        scene3Q1.addEventListener("ended", vibrate);
+        console.log("wait for user to swipe");
+        answer = await myPromiseGenerator();
+        console.log(answer);
+        if (answer == true) {
+            a += 1;
+            lastA = true;
+            console.log("answer yes", a, lastA);
+        }
+        else {
+            a -= 1;
+            lastA = false;
+            console.log("answer yes", a, lastA);
+        }
+        if (a < 0) {
+            console.log("play scene3 Negative Version + Q");
+            scene3NegativeVQ2.play();
+            scene3NegativeVQ2.addEventListener("ended", vibrate);
+        }
+        else if (a > 0) {
+            console.log("play scene3 Positive Version + Q");
+            scene3PositiveVQ2.play();
+            scene3PositiveVQ2.addEventListener("ended", vibrate);
+        }
+        else {
+            console.log("play scene3 Both Versions + Q");
+            scene3BothVQ2.play();
+            scene3BothVQ2.addEventListener("ended", vibrate);
+        }
+        console.log("wait for user to swipe");
+        answer = await myPromiseGenerator();
+        console.log(answer);
+        if (answer == true) {
+            scene3AnswerYes.play();
+            a -= 1;
+            lastA = false;
+            changeAtmo();
+            console.log("answer yes", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            scene3AnswerYes.addEventListener("ended", function () {
+                console.log("end of scene3");
+                playS4Cutscene();
+            });
+        }
+        else {
+            scene3AnswerNo.play();
+            a += 1;
+            lastA = true;
+            changeAtmo();
+            console.log("answer yes", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            scene3AnswerNo.addEventListener("ended", function () {
+                console.log("end of scene3");
+                playS4Cutscene();
+            });
+        }
+    }
+    function playS4Cutscene() {
+        if (a > 0) {
+            scene4PositiveV.play();
+        }
+        else if (a < 0) {
+            scene4NegativeV.play();
+        }
+        else {
+            if (lastA == true) {
+                scene4PositiveV.play();
+            }
+            else {
+                scene4NegativeV.play();
+            }
+        }
     }
     //gibt Koordinaten der ersten touchpoints wieder
     function startTouch(e) {
@@ -163,105 +265,19 @@ var NatureReloaded;
         }
         navigator.vibrate(1000);
     }
+    async function myPromiseGenerator() {
+        return new Promise((resolve) => {
+            document.addEventListener("touchend", function () {
+                resolve(answer);
+            }, { once: true });
+        });
+    }
     /*   function handlePlayPause(): void {
-           allAudio = document.getElementsByTagName("audio");
-           console.log(allAudio);
-           pauseIcon.style.display = "none";
-           playIcon.style.display = "block";
-   
-       }*/
-    /*  function playS2Hunting(): void {
-      atmoGreen.play();
-      atmoGreen.volume = 0.5;
-      atmoRed.play();
-      atmoRed.volume = 0.5;
+       allAudio = document.getElementsByTagName("audio");
+       console.log(allAudio);
+       pauseIcon.style.display = "none";
+       playIcon.style.display = "block";
  
-      scene2Q.play();
- 
-      //somehow wait for swipe of user
- 
-      answer = endTouch(); //?
- 
-      if (answer == true) {
-          scene2AnswerYes.play();
-          a += 1;
-          lastA = true;
-          console.log("audio answer yes", a, lastA);
-          changeAtmo();
-          scene2AnswerYes.addEventListener("ended", playS3SafeEnergy);
- 
-      } else {
-          scene2AnswerNo.play();
-          a -= 1;
-          lastA = false;
-          console.log("audio answer no", a, lastA);
-          changeAtmo();
-          scene2AnswerNo.addEventListener("ended", playS3SafeEnergy);
-      }
-  }
- 
-  function playS3SafeEnergy(): void {
- 
-      scene3Q1.play();
- 
-      //somehow wait for swipe of user
- 
-      answer = endTouch(); //?
- 
-      if (answer == true) {
-          a += 1;
-          lastA = true;
-          changeAtmo();
-      } else {
-          a -= 1;
-          lastA = false;
-          changeAtmo();
-      }
- 
- 
-      if (a < 0) {
-          scene3NegativeVQ2.play();
-      } else if (a > 0) {
-          scene3PositiveVQ2.play();
-      } else {
-          scene3BothVQ2.play();
-      }
- 
-      //somehow wait for swipe of user
- 
-      answer = endTouch(); //?
- 
-      if (answer == true) {
-          scene3AnswerYes.play();
-          a -= 1;
-          lastA = false;
-          console.log("audio answer yes", a, lastA);
-          changeAtmo();
-          scene3AnswerYes.addEventListener("ended", playS4Cutscene);
- 
-      } else {
-          scene3AnswerNo.play();
-          a += 1;
-          lastA = true;
-          console.log("audio answer no", a, lastA);
-          changeAtmo();
-          scene3AnswerNo.addEventListener("ended", playS4Cutscene);
-      }
-  }
- 
-  function playS4Cutscene(): void {
-      if (a > 0) {
-          scene4PositiveV.play();
-      }
-      else if (a < 0) {
-          scene4NegativeV.play();
-      } else {
-          if (lastA == true) {
-              scene4PositiveV.play();
-          } else {
-              scene4NegativeV.play();
-          }
-      }
-  }*/
+   }*/
 })(NatureReloaded || (NatureReloaded = {}));
 //# sourceMappingURL=natureReloaded.js.map
