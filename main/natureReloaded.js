@@ -12,25 +12,25 @@ var NatureReloaded;
     let initialX = null;
     let initialY = null;
     //atmos
-    let atmoGreen = new Audio("/audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-    let atmoRed = new Audio("/audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+    let atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
     //all audio clips 
-    let prologue1Q = new Audio("/audios/prologue+question_placeh.ogg");
-    let prologueAnswerYes = new Audio("/audios/prologue_answerYes_placeh.ogg");
-    let prologueAnswerNo = new Audio("/audios/prologue_answerNo_placeh.ogg");
-    let prologue2 = new Audio("/audios/rest_of_prologue_placeh.ogg");
-    let scene2Q = new Audio("/audios/scene2+question_placeh.ogg");
-    let scene2AnswerYes = new Audio("/audios/scene2_answerYes_placeh.ogg");
-    let scene2AnswerNo = new Audio("/audios/scene2_answerNo_placeh.ogg");
-    let scene3Q1 = new Audio("/audios/scene3+question1_placeh.ogg");
-    let scene3PositiveVQ2 = new Audio("/audios/scene3_positiveArguments_placeh.ogg");
-    let scene3NegativeVQ2 = new Audio("/audios/scene3_negativeArguments_placeh.ogg");
-    let scene3BothVQ2 = new Audio("/audios/scene3_neutralArguments_placeh.ogg");
-    let scene3AnswerYes = new Audio("/audios/scene3_answerYes_placeh.ogg");
-    let scene3AnswerNo = new Audio("/audios/scene3_answerNo_placeh.ogg");
-    let scene4PositiveV = new Audio("/audios/scene4_positiveSide_placeh.ogg");
-    let scene4NegativeV = new Audio("/audios/scene4_negativeSide_placeh.ogg");
-    let allAudio;
+    let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
+    let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
+    let prologueAnswerNo = new Audio("./audios/prologue_answerNo_placeh.ogg");
+    let prologue2 = new Audio("./audios/rest_of_prologue_placeh.ogg");
+    let scene2Q = new Audio("./audios/scene2+question_placeh.ogg");
+    let scene2AnswerYes = new Audio("./audios/scene2_answerYes_placeh.ogg");
+    let scene2AnswerNo = new Audio("./audios/scene2_answerNo_placeh.ogg");
+    let scene3Q1 = new Audio("./audios/scene3+question1_placeh.ogg");
+    let scene3PositiveVQ2 = new Audio("./audios/scene3_positiveArguments_placeh.ogg");
+    let scene3NegativeVQ2 = new Audio("./audios/scene3_negativeArguments_placeh.ogg");
+    let scene3BothVQ2 = new Audio("./audios/scene3_neutralArguments_placeh.ogg");
+    let scene3AnswerYes = new Audio("./audios/scene3_answerYes_placeh.ogg");
+    let scene3AnswerNo = new Audio("./audios/scene3_answerNo_placeh.ogg");
+    let scene4PositiveV = new Audio("./audios/scene4_positiveSide_placeh.ogg");
+    let scene4NegativeV = new Audio("./audios/scene4_negativeSide_placeh.ogg");
+    //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
     //Start-Buttons
     let startButton;
     let buttonTipp1;
@@ -48,7 +48,7 @@ var NatureReloaded;
         pauseIcon = document.querySelector("#pauseIcon");
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
-        pauseIcon.addEventListener("click", handlePlayPause);
+        // pauseIcon.addEventListener("click", handlePlayPause);
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", handleTouchmove, false);
         document.addEventListener("touchend", endTouch);
@@ -73,16 +73,12 @@ var NatureReloaded;
     function hideWarning() {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "block";
-        startAudioBook();
-    }
-    function startAudioBook() {
         playS1Prologue();
-        //  playS2Hunting();
-        // console.log("Ende Start audiobook");
     }
     function playS1Prologue() {
         console.log("start Prologue");
         prologue1Q.play();
+        prologue1Q.addEventListener("ended", vibrate);
         //somehow wait for swipe of user
         answer = endTouch(); //?
         if (answer == true) {
@@ -130,12 +126,12 @@ var NatureReloaded;
         if (answer == true) {
             a += 1;
             lastA = true;
-            changeAtmo(); //? ulla
+            changeAtmo();
         }
         else {
             a -= 1;
             lastA = false;
-            changeAtmo(); //? ulla
+            changeAtmo();
         }
         if (a < 0) {
             scene3NegativeVQ2.play();
@@ -188,7 +184,6 @@ var NatureReloaded;
         console.log(initialX, initialY, e.touches[0]);
     }
     function handleTouchmove(e) {
-        vibrate();
         let currentX = e.touches[0].clientX;
         let currentY = e.touches[0].clientY;
         let diffX = initialX - currentX;
@@ -233,11 +228,12 @@ var NatureReloaded;
         }
         navigator.vibrate(1000);
     }
-    function handlePlayPause() {
-        allAudio = document.getElementsByTagName("audio");
-        console.log(allAudio);
-        pauseIcon.style.display = "none";
-        playIcon.style.display = "block";
-    }
+    /*   function handlePlayPause(): void {
+           allAudio = document.getElementsByTagName("audio");
+           console.log(allAudio);
+           pauseIcon.style.display = "none";
+           playIcon.style.display = "block";
+   
+       }*/
 })(NatureReloaded || (NatureReloaded = {}));
 //# sourceMappingURL=natureReloaded.js.map
