@@ -60,6 +60,8 @@ namespace NatureReloaded {
         playIcon = <HTMLImageElement>document.querySelector("#playIcon");
         pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
 
+        document.body.appendChild(prologue1Q);
+
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
         // pauseIcon.addEventListener("click", handlePlayPause);

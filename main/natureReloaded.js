@@ -46,6 +46,7 @@ var NatureReloaded;
         buttonWarning = document.querySelector("#warning");
         playIcon = document.querySelector("#playIcon");
         pauseIcon = document.querySelector("#pauseIcon");
+        document.body.appendChild(prologue1Q);
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
         // pauseIcon.addEventListener("click", handlePlayPause);
