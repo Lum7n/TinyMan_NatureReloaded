@@ -101,11 +101,10 @@ namespace NatureReloaded {
 
     async function playS1Prologue(): Promise<void> {
 
+        prologue1Q.addEventListener("ended", vibrate);
         prologue1Q.play();
         console.log("startPrologue");
-        prologue1Q.addEventListener("ended", vibrate);
-
-
+   
         console.log("wait for user to swipe");
         answer = await myPromiseGenerator();
         console.log(answer);
@@ -140,10 +139,9 @@ namespace NatureReloaded {
         atmoRed.volume = 0.5;
         console.log("start AtmoRed", atmoRed.volume);
 
+        scene2Q.addEventListener("ended", vibrate);
         scene2Q.play();
         console.log("start scene2 + Q");
-
-        scene2Q.addEventListener("ended", vibrate);
 
         console.log("wait for user to swipe");
         answer = await myPromiseGenerator();
