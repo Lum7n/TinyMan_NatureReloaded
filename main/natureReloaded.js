@@ -40,6 +40,7 @@ var NatureReloaded;
     let playIcon;
     let pauseIcon;
     function handleLoad() {
+        let body = document.querySelector("body");
         startButton = document.querySelector("#startButton");
         buttonTipp1 = document.querySelector("#tipp1");
         buttonTipp2 = document.querySelector("#tipp2");
@@ -48,7 +49,7 @@ var NatureReloaded;
         pauseIcon = document.querySelector("#pauseIcon");
         atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
         prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
-        document.body.appendChild(prologue1Q);
+        body.appendChild(prologue1Q);
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
         // pauseIcon.addEventListener("click", handlePlayPause);

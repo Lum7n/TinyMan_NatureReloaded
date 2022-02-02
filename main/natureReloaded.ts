@@ -53,6 +53,7 @@ namespace NatureReloaded {
 
     function handleLoad(): void {
 
+        let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
         startButton = <HTMLButtonElement>document.querySelector("#startButton");
         buttonTipp1 = <HTMLButtonElement>document.querySelector("#tipp1");
         buttonTipp2 = <HTMLButtonElement>document.querySelector("#tipp2");
@@ -60,10 +61,10 @@ namespace NatureReloaded {
         playIcon = <HTMLImageElement>document.querySelector("#playIcon");
         pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
 
-        atmoGreen= new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-        prologue1Q= new Audio("./audios/prologue+question_placeh.ogg");
+        atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
 
-        document.body.appendChild(prologue1Q);
+        prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
+        body.appendChild(prologue1Q);
 
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
