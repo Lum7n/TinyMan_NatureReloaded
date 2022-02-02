@@ -58,8 +58,10 @@ namespace WaitforSwipe {
             prologue2.addEventListener("ended", playS2Hunting);
             console.log("End of prologue");
         }
+    }
 
-
+    function playS2Hunting(): void {
+        console.log("play S2Hunting");
     }
 
     async function myPromiseGenerator(): Promise<boolean> {

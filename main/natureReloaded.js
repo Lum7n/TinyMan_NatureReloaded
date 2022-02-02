@@ -31,7 +31,6 @@ var NatureReloaded;
     let scene4PositiveV = new Audio("./audios/scene4_positiveSide_placeh.ogg");
     let scene4NegativeV = new Audio("./audios/scene4_negativeSide_placeh.ogg");
     //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
-    let userTouched = false;
     //Start-Buttons
     let startButton;
     let buttonTipp1;
@@ -85,7 +84,7 @@ var NatureReloaded;
         answer = await myPromiseGenerator();
         console.log(answer);
         if (answer === true) {
-            console.log("answer yes");
+            console.log("answer: yes");
             prologueAnswerYes.play();
             prologueAnswerYes.addEventListener("ended", function () {
                 console.log("rest of prologue");
@@ -93,7 +92,7 @@ var NatureReloaded;
             });
         }
         else {
-            console.log("answer no");
+            console.log("answer: no");
             prologueAnswerNo.play();
             prologueAnswerNo.addEventListener("ended", function () {
                 console.log("rest of prologue");
@@ -105,10 +104,10 @@ var NatureReloaded;
     async function playS2Hunting() {
         atmoGreen.play();
         atmoGreen.volume = 0.5;
-        console.log("start AtmoGreen", atmoGreen.volume);
+        console.log("start AtmoGreen at:", atmoGreen.volume);
         atmoRed.play();
         atmoRed.volume = 0.5;
-        console.log("start AtmoRed", atmoRed.volume);
+        console.log("start AtmoRed at:", atmoRed.volume);
         scene2Q.addEventListener("ended", vibrate);
         scene2Q.play();
         console.log("start scene2 + Q");
@@ -120,7 +119,7 @@ var NatureReloaded;
             a += 1;
             lastA = true;
             changeAtmo();
-            console.log("answer yes", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            console.log("answer: yes", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
             scene2AnswerYes.addEventListener("ended", function () {
                 console.log("end of scene2");
                 playS3SafeEnergy();
@@ -131,7 +130,7 @@ var NatureReloaded;
             a -= 1;
             lastA = false;
             changeAtmo();
-            console.log("answer no", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            console.log("answer: no", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
             scene2AnswerNo.addEventListener("ended", function () {
                 console.log("end of scene2");
                 playS3SafeEnergy();
@@ -139,36 +138,36 @@ var NatureReloaded;
         }
     }
     async function playS3SafeEnergy() {
+        scene3Q1.addEventListener("ended", vibrate);
         scene3Q1.play();
         console.log("start Scene 3 + Q");
-        scene3Q1.addEventListener("ended", vibrate);
         console.log("wait for user to swipe");
         answer = await myPromiseGenerator();
         console.log(answer);
         if (answer == true) {
             a += 1;
             lastA = true;
-            console.log("answer yes", a, lastA);
+            console.log("answer: yes", "a:", a, "lastA:", lastA, "no AtmoChange");
         }
         else {
             a -= 1;
             lastA = false;
-            console.log("answer yes", a, lastA);
+            console.log("answer: yes", "a:", a, "lastA:", lastA, "noAtmoChange");
         }
         if (a < 0) {
+            scene3NegativeVQ2.addEventListener("ended", vibrate);
             console.log("play scene3 Negative Version + Q");
             scene3NegativeVQ2.play();
-            scene3NegativeVQ2.addEventListener("ended", vibrate);
         }
         else if (a > 0) {
+            scene3PositiveVQ2.addEventListener("ended", vibrate);
             console.log("play scene3 Positive Version + Q");
             scene3PositiveVQ2.play();
-            scene3PositiveVQ2.addEventListener("ended", vibrate);
         }
         else {
+            scene3BothVQ2.addEventListener("ended", vibrate);
             console.log("play scene3 Both Versions + Q");
             scene3BothVQ2.play();
-            scene3BothVQ2.addEventListener("ended", vibrate);
         }
         console.log("wait for user to swipe");
         answer = await myPromiseGenerator();
@@ -178,7 +177,7 @@ var NatureReloaded;
             a -= 1;
             lastA = false;
             changeAtmo();
-            console.log("answer yes", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            console.log("answer: yes", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
             scene3AnswerYes.addEventListener("ended", function () {
                 console.log("end of scene3");
                 playS4Cutscene();
@@ -189,7 +188,7 @@ var NatureReloaded;
             a += 1;
             lastA = true;
             changeAtmo();
-            console.log("answer yes", a, lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            console.log("answer: no", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
             scene3AnswerNo.addEventListener("ended", function () {
                 console.log("end of scene3");
                 playS4Cutscene();
@@ -197,17 +196,22 @@ var NatureReloaded;
         }
     }
     function playS4Cutscene() {
+        console.log("play scene 4");
         if (a > 0) {
+            console.log("play scene 4 positiveV");
             scene4PositiveV.play();
         }
         else if (a < 0) {
+            console.log("play scene 4 negativeV");
             scene4NegativeV.play();
         }
         else {
             if (lastA == true) {
+                console.log("play scene 4 positiveV");
                 scene4PositiveV.play();
             }
             else {
+                console.log("play scene 4 negativeV");
                 scene4NegativeV.play();
             }
         }

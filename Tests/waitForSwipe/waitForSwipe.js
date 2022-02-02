@@ -48,6 +48,9 @@ var WaitforSwipe;
             console.log("End of prologue");
         }
     }
+    function playS2Hunting() {
+        console.log("play S2Hunting");
+    }
     async function myPromiseGenerator() {
         return new Promise((resolve) => {
             document.addEventListener("touchend", function (e) {
