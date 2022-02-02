@@ -17,19 +17,19 @@ var NatureReloaded;
     //all audio clips 
     let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
     let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
-    let prologueAnswerNo = new Audio("../audios/prologue_answerNo_placeh.ogg");
-    let prologue2 = new Audio("../audios/rest_of_prologue_placeh.ogg");
-    let scene2Q = new Audio("../audios/scene2+question_placeh.ogg");
-    let scene2AnswerYes = new Audio("../audios/scene2_answerYes_placeh.ogg");
-    let scene2AnswerNo = new Audio("../audios/scene2_answerNo_placeh.ogg");
-    let scene3Q1 = new Audio("../audios/scene3+question1_placeh.ogg");
-    let scene3PositiveVQ2 = new Audio("../audios/scene3_positiveArguments_placeh.ogg");
-    let scene3NegativeVQ2 = new Audio("../audios/scene3_negativeArguments_placeh.ogg");
-    let scene3BothVQ2 = new Audio("../audios/scene3_neutralArguments_placeh.ogg");
-    let scene3AnswerYes = new Audio("../audios/scene3_answerYes_placeh.ogg");
-    let scene3AnswerNo = new Audio("../audios/scene3_answerNo_placeh.ogg");
-    let scene4PositiveV = new Audio("../audios/scene4_positiveSide_placeh.ogg");
-    let scene4NegativeV = new Audio("../audios/scene4_negativeSide_placeh.ogg");
+    let prologueAnswerNo = new Audio("./audios/prologue_answerNo_placeh.ogg");
+    let prologue2 = new Audio("./audios/rest_of_prologue_placeh.ogg");
+    let scene2Q = new Audio("./audios/scene2+question_placeh.ogg");
+    let scene2AnswerYes = new Audio("./audios/scene2_answerYes_placeh.ogg");
+    let scene2AnswerNo = new Audio("./audios/scene2_answerNo_placeh.ogg");
+    let scene3Q1 = new Audio("./audios/scene3+question1_placeh.ogg");
+    let scene3PositiveVQ2 = new Audio("./audios/scene3_positiveArguments_placeh.ogg");
+    let scene3NegativeVQ2 = new Audio("./audios/scene3_negativeArguments_placeh.ogg");
+    let scene3BothVQ2 = new Audio("./audios/scene3_neutralArguments_placeh.ogg");
+    let scene3AnswerYes = new Audio("./audios/scene3_answerYes_placeh.ogg");
+    let scene3AnswerNo = new Audio("./audios/scene3_answerNo_placeh.ogg");
+    let scene4PositiveV = new Audio("./audios/scene4_positiveSide_placeh.ogg");
+    let scene4NegativeV = new Audio("./audios/scene4_negativeSide_placeh.ogg");
     //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
     //Start-Buttons
     let startButton;
@@ -100,89 +100,99 @@ var NatureReloaded;
         prologue2.addEventListener("ended", playS2Hunting);
         console.log("End of prologue");
     }
-    function playS2Hunting() {
-        atmoGreen.play();
-        atmoGreen.volume = 0.5;
-        atmoRed.play();
-        atmoRed.volume = 0.5;
-        scene2Q.play();
-        //somehow wait for swipe of user
-        answer = endTouch(); //?
-        if (answer == true) {
-            scene2AnswerYes.play();
-            a += 1;
-            lastA = true;
-            console.log("audio answer yes", a, lastA);
-            changeAtmo();
-            scene2AnswerYes.addEventListener("ended", playS3SafeEnergy);
-        }
-        else {
-            scene2AnswerNo.play();
-            a -= 1;
-            lastA = false;
-            console.log("audio answer no", a, lastA);
-            changeAtmo();
-            scene2AnswerNo.addEventListener("ended", playS3SafeEnergy);
-        }
-    }
-    function playS3SafeEnergy() {
-        scene3Q1.play();
-        //somehow wait for swipe of user
-        answer = endTouch(); //?
-        if (answer == true) {
-            a += 1;
-            lastA = true;
-            changeAtmo();
-        }
-        else {
-            a -= 1;
-            lastA = false;
-            changeAtmo();
-        }
-        if (a < 0) {
-            scene3NegativeVQ2.play();
-        }
-        else if (a > 0) {
-            scene3PositiveVQ2.play();
-        }
-        else {
-            scene3BothVQ2.play();
-        }
-        //somehow wait for swipe of user
-        answer = endTouch(); //?
-        if (answer == true) {
-            scene3AnswerYes.play();
-            a -= 1;
-            lastA = false;
-            console.log("audio answer yes", a, lastA);
-            changeAtmo();
-            scene3AnswerYes.addEventListener("ended", playS4Cutscene);
-        }
-        else {
-            scene3AnswerNo.play();
-            a += 1;
-            lastA = true;
-            console.log("audio answer no", a, lastA);
-            changeAtmo();
-            scene3AnswerNo.addEventListener("ended", playS4Cutscene);
-        }
-    }
-    function playS4Cutscene() {
-        if (a > 0) {
-            scene4PositiveV.play();
-        }
-        else if (a < 0) {
-            scene4NegativeV.play();
-        }
-        else {
-            if (lastA == true) {
-                scene4PositiveV.play();
-            }
-            else {
-                scene4NegativeV.play();
-            }
-        }
-    }
+    /*  function playS2Hunting(): void {
+          atmoGreen.play();
+          atmoGreen.volume = 0.5;
+          atmoRed.play();
+          atmoRed.volume = 0.5;
+  
+          scene2Q.play();
+  
+          //somehow wait for swipe of user
+  
+          answer = endTouch(); //?
+  
+          if (answer == true) {
+              scene2AnswerYes.play();
+              a += 1;
+              lastA = true;
+              console.log("audio answer yes", a, lastA);
+              changeAtmo();
+              scene2AnswerYes.addEventListener("ended", playS3SafeEnergy);
+  
+          } else {
+              scene2AnswerNo.play();
+              a -= 1;
+              lastA = false;
+              console.log("audio answer no", a, lastA);
+              changeAtmo();
+              scene2AnswerNo.addEventListener("ended", playS3SafeEnergy);
+          }
+      }
+  
+      function playS3SafeEnergy(): void {
+  
+          scene3Q1.play();
+  
+          //somehow wait for swipe of user
+  
+          answer = endTouch(); //?
+  
+          if (answer == true) {
+              a += 1;
+              lastA = true;
+              changeAtmo();
+          } else {
+              a -= 1;
+              lastA = false;
+              changeAtmo();
+          }
+  
+  
+          if (a < 0) {
+              scene3NegativeVQ2.play();
+          } else if (a > 0) {
+              scene3PositiveVQ2.play();
+          } else {
+              scene3BothVQ2.play();
+          }
+  
+          //somehow wait for swipe of user
+  
+          answer = endTouch(); //?
+  
+          if (answer == true) {
+              scene3AnswerYes.play();
+              a -= 1;
+              lastA = false;
+              console.log("audio answer yes", a, lastA);
+              changeAtmo();
+              scene3AnswerYes.addEventListener("ended", playS4Cutscene);
+  
+          } else {
+              scene3AnswerNo.play();
+              a += 1;
+              lastA = true;
+              console.log("audio answer no", a, lastA);
+              changeAtmo();
+              scene3AnswerNo.addEventListener("ended", playS4Cutscene);
+          }
+      }
+  
+      function playS4Cutscene(): void {
+          if (a > 0) {
+              scene4PositiveV.play();
+          }
+          else if (a < 0) {
+              scene4NegativeV.play();
+          } else {
+              if (lastA == true) {
+                  scene4PositiveV.play();
+              } else {
+                  scene4NegativeV.play();
+              }
+          }
+      }*/
     //gibt Koordinaten der ersten touchpoints wieder
     function startTouch(e) {
         initialX = e.touches[0].clientX;

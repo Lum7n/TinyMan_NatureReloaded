@@ -20,22 +20,22 @@ namespace NatureReloaded {
     //all audio clips 
     let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
     let prologueAnswerYes: HTMLAudioElement = new Audio("./audios/prologue_answerYes_placeh.ogg");
-    let prologueAnswerNo: HTMLAudioElement = new Audio("../audios/prologue_answerNo_placeh.ogg");
-    let prologue2: HTMLAudioElement = new Audio("../audios/rest_of_prologue_placeh.ogg");
+    let prologueAnswerNo: HTMLAudioElement = new Audio("./audios/prologue_answerNo_placeh.ogg");
+    let prologue2: HTMLAudioElement = new Audio("./audios/rest_of_prologue_placeh.ogg");
 
-    let scene2Q: HTMLAudioElement = new Audio("../audios/scene2+question_placeh.ogg");
-    let scene2AnswerYes: HTMLAudioElement = new Audio("../audios/scene2_answerYes_placeh.ogg");
-    let scene2AnswerNo: HTMLAudioElement = new Audio("../audios/scene2_answerNo_placeh.ogg");
+    let scene2Q: HTMLAudioElement = new Audio("./audios/scene2+question_placeh.ogg");
+    let scene2AnswerYes: HTMLAudioElement = new Audio("./audios/scene2_answerYes_placeh.ogg");
+    let scene2AnswerNo: HTMLAudioElement = new Audio("./audios/scene2_answerNo_placeh.ogg");
 
-    let scene3Q1: HTMLAudioElement = new Audio("../audios/scene3+question1_placeh.ogg");
-    let scene3PositiveVQ2: HTMLAudioElement = new Audio("../audios/scene3_positiveArguments_placeh.ogg");
-    let scene3NegativeVQ2: HTMLAudioElement = new Audio("../audios/scene3_negativeArguments_placeh.ogg");
-    let scene3BothVQ2: HTMLAudioElement = new Audio("../audios/scene3_neutralArguments_placeh.ogg");
-    let scene3AnswerYes: HTMLAudioElement = new Audio("../audios/scene3_answerYes_placeh.ogg");
-    let scene3AnswerNo: HTMLAudioElement = new Audio("../audios/scene3_answerNo_placeh.ogg");
+    let scene3Q1: HTMLAudioElement = new Audio("./audios/scene3+question1_placeh.ogg");
+    let scene3PositiveVQ2: HTMLAudioElement = new Audio("./audios/scene3_positiveArguments_placeh.ogg");
+    let scene3NegativeVQ2: HTMLAudioElement = new Audio("./audios/scene3_negativeArguments_placeh.ogg");
+    let scene3BothVQ2: HTMLAudioElement = new Audio("./audios/scene3_neutralArguments_placeh.ogg");
+    let scene3AnswerYes: HTMLAudioElement = new Audio("./audios/scene3_answerYes_placeh.ogg");
+    let scene3AnswerNo: HTMLAudioElement = new Audio("./audios/scene3_answerNo_placeh.ogg");
 
-    let scene4PositiveV: HTMLAudioElement = new Audio("../audios/scene4_positiveSide_placeh.ogg");
-    let scene4NegativeV: HTMLAudioElement = new Audio("../audios/scene4_negativeSide_placeh.ogg");
+    let scene4PositiveV: HTMLAudioElement = new Audio("./audios/scene4_positiveSide_placeh.ogg");
+    let scene4NegativeV: HTMLAudioElement = new Audio("./audios/scene4_negativeSide_placeh.ogg");
 
     //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
 
@@ -124,7 +124,7 @@ namespace NatureReloaded {
         console.log("End of prologue");
     }
 
-    function playS2Hunting(): void {
+  /*  function playS2Hunting(): void {
         atmoGreen.play();
         atmoGreen.volume = 0.5;
         atmoRed.play();
@@ -216,7 +216,7 @@ namespace NatureReloaded {
                 scene4NegativeV.play();
             }
         }
-    }
+    }*/
 
     //gibt Koordinaten der ersten touchpoints wieder
     function startTouch(e: any): void {
