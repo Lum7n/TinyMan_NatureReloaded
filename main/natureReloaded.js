@@ -104,7 +104,7 @@ var NatureReloaded;
         }
     }
     async function myPromiseGenerator() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, request) => {
             document.addEventListener("touchend", function (e) {
                 resolve(answer);
             }, { once: true });

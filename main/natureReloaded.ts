@@ -133,7 +133,7 @@ namespace NatureReloaded {
 
     async function myPromiseGenerator(): Promise<boolean> {
 
-        return new Promise((resolve) => {
+        return new Promise((resolve, request) => {
             document.addEventListener("touchend", function (e): void {
                 resolve(answer);
 
