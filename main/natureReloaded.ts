@@ -37,7 +37,7 @@ namespace NatureReloaded {
     let scene4PositiveV: HTMLAudioElement = new Audio("./audios/scene4_positiveSide_placeh.ogg");
     let scene4NegativeV: HTMLAudioElement = new Audio("./audios/scene4_negativeSide_placeh.ogg");
 
-  //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
+    //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
 
     //Start-Buttons
     let startButton: HTMLButtonElement;
@@ -62,7 +62,7 @@ namespace NatureReloaded {
 
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
-       // pauseIcon.addEventListener("click", handlePlayPause);
+        // pauseIcon.addEventListener("click", handlePlayPause);
 
 
         document.addEventListener("touchstart", startTouch, false);
@@ -95,17 +95,21 @@ namespace NatureReloaded {
     function hideWarning(): void {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "block";
-  
+
         playS1Prologue();
     }
 
     function playS1Prologue(): void {
         console.log("start Prologue");
-        prologue1Q.play();
+        prologue1Q.addEventListener("canplaythrough", event => {
+            /* the audio is now playable; play it if permissions allow */
+            prologue1Q.play();
+        });
+        // prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
-        
+
         //somehow wait for swipe of user
-        
+
         answer = endTouch();  //?
 
         if (answer == true) {
@@ -162,11 +166,11 @@ namespace NatureReloaded {
         if (answer == true) {
             a += 1;
             lastA = true;
-            changeAtmo(); 
+            changeAtmo();
         } else {
             a -= 1;
             lastA = false;
-            changeAtmo(); 
+            changeAtmo();
         }
 
 
@@ -270,13 +274,13 @@ namespace NatureReloaded {
         navigator.vibrate(1000);
     }
 
- /*   function handlePlayPause(): void {
-        allAudio = document.getElementsByTagName("audio");
-        console.log(allAudio);
-        pauseIcon.style.display = "none";
-        playIcon.style.display = "block";
-
-    }*/
+    /*   function handlePlayPause(): void {
+           allAudio = document.getElementsByTagName("audio");
+           console.log(allAudio);
+           pauseIcon.style.display = "none";
+           playIcon.style.display = "block";
+   
+       }*/
 
 
 }
