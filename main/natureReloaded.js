@@ -90,7 +90,6 @@ var NatureReloaded;
             prologueAnswerYes.addEventListener("ended", function () {
                 console.log("rest of prologue");
                 prologue2.play();
-                prologue2.addEventListener("ended", playS2Hunting);
             });
         }
         else {
@@ -99,9 +98,9 @@ var NatureReloaded;
             prologueAnswerNo.addEventListener("ended", function () {
                 console.log("rest of prologue");
                 prologue2.play();
-                prologue2.addEventListener("ended", playS2Hunting);
             });
         }
+        prologue2.addEventListener("ended", playS2Hunting);
     }
     async function playS2Hunting() {
         atmoGreen.play();

@@ -116,7 +116,6 @@ namespace NatureReloaded {
             prologueAnswerYes.addEventListener("ended", function (): void {
                 console.log("rest of prologue");
                 prologue2.play();
-                prologue2.addEventListener("ended", playS2Hunting);
             });
         } else {
             console.log("answer no");
@@ -124,9 +123,11 @@ namespace NatureReloaded {
             prologueAnswerNo.addEventListener("ended", function (): void {
                 console.log("rest of prologue");
                 prologue2.play();
-                prologue2.addEventListener("ended", playS2Hunting);
+              
             });
         }
+
+        prologue2.addEventListener("ended", playS2Hunting);
     }
 
     async function playS2Hunting(): Promise<void> {
