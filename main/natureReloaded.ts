@@ -4,8 +4,11 @@ namespace NatureReloaded {
 
     //to count atmo-points
     let a: number = 0;
-    //set last answer 
+
+    //sets impact of last answer the user gave 
+    //a-=1 -> lastA = false/ a+=1 -> lastA = true
     let lastA: boolean = true;
+
     //swipe left = no/false, swipe right = yes/true
     let answer: boolean;
 
@@ -15,7 +18,9 @@ namespace NatureReloaded {
 
     //atmos
     let atmoGreen: HTMLAudioElement = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+    let atmoGreenV: number = 0.5;
     let atmoRed: HTMLAudioElement = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoRedV: number = 0.5;
 
     //all audio clips 
     let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
@@ -48,7 +53,6 @@ namespace NatureReloaded {
     //Pause/Play-Imgs
     let playIcon: HTMLImageElement;
     let pauseIcon: HTMLImageElement;
-
 
 
     function handleLoad(): void {
@@ -236,7 +240,7 @@ namespace NatureReloaded {
     function playS4Cutscene(): void {
 
         console.log("play scene 4");
-        
+
         if (a > 0) {
             console.log("play scene 4 positiveV");
             scene4PositiveV.play();

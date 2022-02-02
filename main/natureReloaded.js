@@ -4,7 +4,8 @@ var NatureReloaded;
     window.addEventListener("load", handleLoad);
     //to count atmo-points
     let a = 0;
-    //set last answer 
+    //sets impact of last answer the user gave 
+    //a-=1 -> lastA = false/ a+=1 -> lastA = true
     let lastA = true;
     //swipe left = no/false, swipe right = yes/true
     let answer;
@@ -13,7 +14,9 @@ var NatureReloaded;
     let initialY = null;
     //atmos
     let atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
+    let atmoGreenV = 0.5;
     let atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoRedV = 0.5;
     //all audio clips 
     let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
     let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
