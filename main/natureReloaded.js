@@ -50,6 +50,7 @@ var NatureReloaded;
         atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
         prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
         body.appendChild(prologue1Q);
+        body.appendChild(atmoGreen);
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
         // pauseIcon.addEventListener("click", handlePlayPause);
