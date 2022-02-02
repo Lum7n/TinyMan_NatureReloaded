@@ -67,6 +67,7 @@ namespace NatureReloaded {
         prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
         body.appendChild(prologue1Q);
         body.appendChild(atmoGreen);
+        body.appendChild(atmoRed);
 
         startButton.addEventListener("click", handleStart);
         //  playIcon.addEventListener("click", handlePlayPause);
