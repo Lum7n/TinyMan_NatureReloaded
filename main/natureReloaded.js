@@ -78,11 +78,12 @@ var NatureReloaded;
     }
     function playS1Prologue() {
         console.log("start Prologue");
-        prologue1Q.addEventListener("canplaythrough", event => {
-            /* the audio is now playable; play it if permissions allow */
-            prologue1Q.play();
-        });
-        // prologue1Q.play();
+        /*  prologue1Q.addEventListener("canplaythrough", event => {
+              // the audio is now playable; play it if permissions allow
+              prologue1Q.play();
+          });
+          */
+        prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
         //somehow wait for swipe of user
         answer = endTouch(); //?
