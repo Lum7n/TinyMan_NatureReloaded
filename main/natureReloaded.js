@@ -79,6 +79,7 @@ var NatureReloaded;
     }
     async function playS1Prologue() {
         prologue1Q.play();
+        console.log("startPrologue");
         prologue1Q.addEventListener("ended", vibrate);
         while (true) {
             console.log("Hello there");

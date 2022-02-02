@@ -102,6 +102,7 @@ namespace NatureReloaded {
     async function playS1Prologue(): Promise<void> {
 
         prologue1Q.play();
+        console.log("startPrologue");
         prologue1Q.addEventListener("ended", vibrate);
 
         while (true) {
