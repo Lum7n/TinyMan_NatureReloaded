@@ -31,6 +31,7 @@ var NatureReloaded;
     let scene4PositiveV = new Audio("./audios/scene4_positiveSide_placeh.ogg");
     let scene4NegativeV = new Audio("./audios/scene4_negativeSide_placeh.ogg");
     //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
+    let userTouched = false;
     //Start-Buttons
     let startButton;
     let buttonTipp1;
@@ -81,6 +82,11 @@ var NatureReloaded;
         prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
         //somehow wait for swipe of user
+        /*   if (userTouched = false) {
+               vibrate();
+           } else {
+               answer = endTouch();
+           }*/
         answer = endTouch(); //?
         if (answer == true) {
             prologueAnswerYes.play();

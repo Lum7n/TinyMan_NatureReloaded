@@ -38,6 +38,7 @@ namespace NatureReloaded {
     let scene4NegativeV: HTMLAudioElement = new Audio("./audios/scene4_negativeSide_placeh.ogg");
 
     //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
+    let userTouched: boolean = false;
 
     //Start-Buttons
     let startButton: HTMLButtonElement;
@@ -105,6 +106,12 @@ namespace NatureReloaded {
 
         //somehow wait for swipe of user
 
+        /*   if (userTouched = false) {
+               vibrate();
+           } else {
+               answer = endTouch();
+           }*/
+           
         answer = endTouch();  //?
 
         if (answer == true) {
