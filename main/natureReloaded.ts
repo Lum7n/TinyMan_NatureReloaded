@@ -110,7 +110,7 @@ namespace NatureReloaded {
             let answer: boolean = await myPromiseGenerator();
             console.log(answer);
 
-            if (answer == true) {
+            if (answer === true) {
                 prologueAnswerYes.play();
                 console.log("audio answer yes");
                 prologueAnswerYes.addEventListener("ended", function (): void {
