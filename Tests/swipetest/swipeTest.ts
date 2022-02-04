@@ -3,34 +3,19 @@ namespace SwipeTest {
     // let answer: boolean = handleTouchmove(); zeigt dann an ob swipe up oder swipe down
     // mit der move großen move funktion zurückgeben - return
     let answer: boolean;
-    window.addEventListener("load", handleLoad);
+    let initialX: any = null;
+    let initialY: any = null;
+    let p: HTMLParagraphElement;
 
+    window.addEventListener("load", handleLoad);
 
     function handleLoad(): void {
 
+        p = <HTMLParagraphElement>document.querySelector("#p");
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", moveTouch, false);
         document.addEventListener("touchend", endTouch);
-        answer = endTouch();
-
-
-
     }
-
-
-    let initialX: any = null;
-    let initialY: any = null;
-
-    function vibrate(): void {
-        if ("vibrate" in navigator) {
-            console.log("Vibration supported");
-        } else {
-            // Vibration not supported
-            console.log("Vibration not supported");
-        }
-        navigator.vibrate(1000);
-    }
-
 
 
     //gibt Koordinaten des touchpoints wieder
@@ -41,9 +26,6 @@ namespace SwipeTest {
     }
 
     function moveTouch(e: any): void {
-
-        vibrate();
-
         let currentX: any = e.touches[0].clientX;
         let currentY: any = e.touches[0].clientY;
         let diffX: number = initialX - currentX;
@@ -73,29 +55,19 @@ namespace SwipeTest {
                   }
               }*/
         }
-
         console.log("touchmove", answer);
+    }
+
+
+    function endTouch() {
+
+        if (answer == true) {
+            p.innerHTML = "swipe to the right; answer = " + answer.toString();
+        } else if (answer == false) {
+            p.innerHTML = "swipe to the left; answer = " + answer.toString();
+        }
 
 
     }
 
-
-    function endTouch(): boolean {
-
-        console.log("endTOUCH", answer);
-        return answer;
-
-    }
-
-    /*function myDisplayer(some: number): void {
-        console.log(some);
-    }
-
-    function myCalculator(num1: number, num2: number, myCallback: CallableFunction): void {
-        let sum: number = num1 + num2;
-        myCallback(sum);
-    }
-
-    myCalculator(5, 5, myDisplayer);*/
-  
 }

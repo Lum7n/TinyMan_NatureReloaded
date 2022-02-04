@@ -4,24 +4,15 @@ var SwipeTest;
     // let answer: boolean = handleTouchmove(); zeigt dann an ob swipe up oder swipe down
     // mit der move großen move funktion zurückgeben - return
     let answer;
+    let initialX = null;
+    let initialY = null;
+    let p;
     window.addEventListener("load", handleLoad);
     function handleLoad() {
+        p = document.querySelector("#p");
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", moveTouch, false);
         document.addEventListener("touchend", endTouch);
-        answer = endTouch();
-    }
-    let initialX = null;
-    let initialY = null;
-    function vibrate() {
-        if ("vibrate" in navigator) {
-            console.log("Vibration supported");
-        }
-        else {
-            // Vibration not supported
-            console.log("Vibration not supported");
-        }
-        navigator.vibrate(1000);
     }
     //gibt Koordinaten des touchpoints wieder
     function startTouch(e) {
@@ -30,7 +21,6 @@ var SwipeTest;
         console.log(initialX, initialY, e.touches[0]);
     }
     function moveTouch(e) {
-        vibrate();
         let currentX = e.touches[0].clientX;
         let currentY = e.touches[0].clientY;
         let diffX = initialX - currentX;
@@ -63,18 +53,12 @@ var SwipeTest;
         console.log("touchmove", answer);
     }
     function endTouch() {
-        console.log("endTOUCH", answer);
-        return answer;
+        if (answer == true) {
+            p.innerHTML = "swipe to the right; answer = " + answer.toString();
+        }
+        else if (answer == false) {
+            p.innerHTML = "swipe to the left; answer = " + answer.toString();
+        }
     }
-    /*function myDisplayer(some: number): void {
-        console.log(some);
-    }
-
-    function myCalculator(num1: number, num2: number, myCallback: CallableFunction): void {
-        let sum: number = num1 + num2;
-        myCallback(sum);
-    }
-
-    myCalculator(5, 5, myDisplayer);*/
 })(SwipeTest || (SwipeTest = {}));
 //# sourceMappingURL=swipeTest.js.map
