@@ -81,7 +81,7 @@ namespace WaitforSwipe {
     async function myPromiseGenerator(): Promise<boolean> {
 
         return new Promise((resolve) => {
-            document.addEventListener("touchend", function (e): void {
+            document.addEventListener("touchend", function (): void {
                 resolve(answer);
 
             }, { once: true });
@@ -168,7 +168,7 @@ namespace WaitforSwipe {
     async function clickPlayPromise(): Promise<boolean> {
 
         return new Promise((resolve) => {
-            playIcon.addEventListener("click", function (e): void {
+            playIcon.addEventListener("click", function (): void {
                 resolve(true);
 
             }, { once: true });

@@ -58,7 +58,7 @@ var WaitforSwipe;
     }
     async function myPromiseGenerator() {
         return new Promise((resolve) => {
-            document.addEventListener("touchend", function (e) {
+            document.addEventListener("touchend", function () {
                 resolve(answer);
             }, { once: true });
         });
@@ -132,7 +132,7 @@ var WaitforSwipe;
     }
     async function clickPlayPromise() {
         return new Promise((resolve) => {
-            playIcon.addEventListener("click", function (e) {
+            playIcon.addEventListener("click", function () {
                 resolve(true);
             }, { once: true });
         });
