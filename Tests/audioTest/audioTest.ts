@@ -17,15 +17,11 @@ namespace audioTest {
         body.append(startbutton);
         startbutton.innerText = "press";
         startbutton.addEventListener("click", playAudio);
-
-
     }
 
     function playAudio(): void {
-
         audioTest1.volume = 0.2;
         audioTest1.play();
-
         changeVolume();
     }
 
