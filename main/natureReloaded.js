@@ -7,14 +7,13 @@ var NatureReloaded;
     //sets impact of last answer the user gave 
     //a-=1 -> lastA = false/ a+=1 -> lastA = true
     let lastA;
-    //swipe left = no/false, swipe right = yes/true
     //answer can't be a boolean because true/false can't be overwritten with something else
     //--> if the user touches the screen by mistake (and doesn't swipe) it will give back the value that was assigned before 
-    //with a string answer can be "reset" before every new question
+    //--> with a string answer can be "reset" before every new question
     let answer = "undefined";
-    //start-coordinates of touch
-    let initialX = null;
-    let initialY = null;
+    //variables needed for detecting touch
+    let initialX;
+    let initialY;
     let currentX;
     let currentY;
     let diffX;
@@ -42,6 +41,7 @@ var NatureReloaded;
     let allAudios = [atmoGreen, atmoRed, prologue1Q, prologueAnswerYes, prologueAnswerNo,
         prologue2, scene2Q, scene2AnswerYes, scene2AnswerNo, scene3Q1, scene3PositiveVQ2, scene3NegativeVQ2,
         scene3BothVQ2, scene3AnswerYes, scene3AnswerNo, scene4PositiveV, scene4NegativeV];
+    let audiosPaused;
     //Start-Buttons
     let startButton;
     let buttonTipp1;
@@ -66,6 +66,7 @@ var NatureReloaded;
         hideLogo();
     }
     function hideLogo() {
+        console.log("hideLogo");
         logo.style.opacity = "0";
         logo.addEventListener("transitionend", function () {
             logo.remove();
@@ -73,10 +74,10 @@ var NatureReloaded;
         });
     }
     function handleStart() {
+        console.log("Start! -> click though buttons");
         startButton.style.display = "none";
         buttonTipp1.style.display = "block";
         buttonTipp1.addEventListener("click", hideTipp1);
-        console.log("Ende Funktion handleStart");
     }
     function hideTipp1() {
         buttonTipp1.style.display = "none";
@@ -94,9 +95,9 @@ var NatureReloaded;
         playS1Prologue();
     }
     async function playS1Prologue() {
+        console.log("startPrologue");
         prologue1Q.addEventListener("ended", vibrate);
         prologue1Q.play();
-        console.log("startPrologue");
         console.log("wait for user to swipe");
         answer = await waitForTouchend();
         while (answer !== "Yes" && answer !== "No") {
@@ -106,9 +107,9 @@ var NatureReloaded;
         console.log("answer: ", answer);
         if (answer === "Yes") {
             //need to solve problem for overlapping audios if user swipes too early
-            //  if (prologue1Q.paused) {}  --> doesn't work, code jumps to vibrate() when swiping too early
-            // .addEventlistener("ended") --> does work, but if the user actually waits long enough the next audio won't play
-            console.log("answer: yes");
+            //if (prologue1Q.paused) {}  --> doesn't work, code jumps to vibrate() when swiping too early
+            //.addEventlistener("ended") --> does work, but if the user actually waits long enough the next audio won't play
+            console.log("play audio to answer yes");
             prologueAnswerYes.play();
             prologueAnswerYes.addEventListener("ended", function () {
                 console.log("rest of prologue");
@@ -117,17 +118,19 @@ var NatureReloaded;
         }
         else if (answer === "No") {
             //  if (prologue1Q.paused) {}
-            console.log("answer: no");
+            console.log("play audio to answer no");
             prologueAnswerNo.play();
             prologueAnswerNo.addEventListener("ended", function () {
                 console.log("rest of prologue");
                 prologue2.play();
+                console.log("end of prologue");
             });
         }
         prologue2.addEventListener("ended", playS2Hunting);
     }
     async function playS2Hunting() {
         answer = "undefined";
+        console.log("start scene2");
         atmoGreen.volume = 0.5;
         atmoGreen.play();
         console.log("start AtmoGreen at: ", atmoGreen.volume);
@@ -136,7 +139,7 @@ var NatureReloaded;
         console.log("start AtmoRed at: ", atmoRed.volume);
         scene2Q.addEventListener("ended", vibrate);
         scene2Q.play();
-        console.log("start scene2 + Q");
+        console.log("play scene2 + Q ");
         console.log("wait for user to swipe");
         answer = await waitForTouchend();
         while (answer !== "No" && answer !== "Yes") {
@@ -145,37 +148,35 @@ var NatureReloaded;
         }
         console.log("answer: ", answer);
         if (answer === "Yes") {
-            scene2Q.addEventListener("ended", function () {
-                scene2AnswerYes.play();
-                a += 1;
-                lastA = true;
-                changeAtmo();
-                console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
-            });
+            scene2AnswerYes.play();
+            a += 1;
+            lastA = true;
+            changeAtmo();
+            console.log("play audio to answer yes", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
             scene2AnswerYes.addEventListener("ended", function () {
                 console.log("end of scene2");
                 playS3SafeEnergy1();
             });
         }
         else if (answer === "No") {
-            scene2Q.addEventListener("ended", function () {
-                scene2AnswerNo.play();
-                a -= 1;
-                lastA = false;
-                changeAtmo();
-                console.log("answer: no", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
-            });
+            scene2AnswerNo.play();
+            a -= 1;
+            lastA = false;
+            changeAtmo();
+            console.log("play audio to answer no", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
             scene2AnswerNo.addEventListener("ended", function () {
                 console.log("end of scene2");
                 playS3SafeEnergy1();
             });
         }
     }
+    //Scene 3 Part1
     async function playS3SafeEnergy1() {
         answer = "undefined";
+        console.log("play S3SafeEnergy Part1");
         scene3Q1.addEventListener("ended", vibrate);
         scene3Q1.play();
-        console.log("start Scene 3 + Q");
+        console.log("play scene3 + Q1");
         console.log("wait for user to swipe");
         answer = await waitForTouchend();
         while (answer !== "No" && answer !== "Yes") {
@@ -187,45 +188,48 @@ var NatureReloaded;
             a += 1;
             lastA = true;
             changeAtmo();
-            console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGreen: ", atmoGreen.volume, "atmoRed: ", atmoRed.volume);
+            console.log("a: ", a, "lastA: ", lastA, "atmoGreen: ", atmoGreen.volume, "atmoRed: ", atmoRed.volume);
         }
         else if (answer === "No") {
             a -= 1;
             lastA = false;
             changeAtmo();
-            console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGreen: ", atmoGreen.volume, "atmoRed: ", atmoRed.volume);
+            console.log("a: ", a, "lastA: ", lastA, "atmoGreen: ", atmoGreen.volume, "atmoRed: ", atmoRed.volume);
         }
-        scene3Q1.addEventListener("ended", function () {
-            if (a < 0) {
-                scene3NegativeVQ2.addEventListener("ended", vibrate);
-                console.log("play scene3 Negative Version + Q");
-                scene3NegativeVQ2.play();
-                scene3NegativeVQ2.addEventListener("ended", function () {
-                    playS3SafeEnergy2();
-                });
-            }
-            else if (a > 0) {
-                scene3PositiveVQ2.addEventListener("ended", vibrate);
-                console.log("play scene3 Positive Version + Q");
-                scene3PositiveVQ2.play();
-                scene3PositiveVQ2.addEventListener("ended", function () {
-                    playS3SafeEnergy2();
-                });
-            }
-            else {
-                scene3BothVQ2.addEventListener("ended", vibrate);
-                console.log("play scene3 Both Versions + Q");
-                scene3BothVQ2.play();
-                scene3BothVQ2.addEventListener("ended", function () {
-                    playS3SafeEnergy2();
-                });
-            }
-        });
+        if (a < 0) {
+            console.log("play scene3 Negative Version + Q");
+            scene3NegativeVQ2.addEventListener("ended", function () {
+                vibrate();
+                console.log("end of scene3 part 1");
+                playS3SafeEnergy2();
+            });
+            scene3NegativeVQ2.play();
+        }
+        else if (a > 0) {
+            console.log("play scene3 Positive Version + Q");
+            scene3PositiveVQ2.addEventListener("ended", function () {
+                vibrate();
+                console.log("end of scene3 part 1");
+                playS3SafeEnergy2();
+            });
+            scene3PositiveVQ2.play();
+        }
+        else {
+            console.log("play scene3 Both Versions + Q");
+            scene3BothVQ2.addEventListener("ended", function () {
+                vibrate();
+                console.log("end of scene3 part 1");
+                playS3SafeEnergy2();
+            });
+            scene3BothVQ2.play();
+        }
     }
     //it's easier to define a new function playS3SafeEnergy2 and call it when hte audio before has ended...
     //then to write six ended-triggers for the following audio
+    //Scene 3 Part 2
     async function playS3SafeEnergy2() {
         answer = "undefined";
+        console.log("play S3SafeEnergy Part2");
         console.log("wait for user to swipe");
         answer = await waitForTouchend();
         while (answer !== "Yes" && answer != "No") {
@@ -238,9 +242,9 @@ var NatureReloaded;
             a -= 1;
             lastA = false;
             changeAtmo();
-            console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
+            console.log("play audio to answer yes", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
             scene3AnswerYes.addEventListener("ended", function () {
-                console.log("end of scene3");
+                console.log("end of scene3 Part 2");
                 playS4Cutscene();
             });
         }
@@ -249,13 +253,14 @@ var NatureReloaded;
             a += 1;
             lastA = true;
             changeAtmo();
-            console.log("answer: no", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
+            console.log("play audio to answer no", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
             scene3AnswerNo.addEventListener("ended", function () {
-                console.log("end of scene3");
+                console.log("end of scene3 Part 2");
                 playS4Cutscene();
             });
         }
     }
+    // Scene 4
     function playS4Cutscene() {
         console.log("play scene 4");
         if (a > 0) {
@@ -276,6 +281,12 @@ var NatureReloaded;
                 scene4NegativeV.play();
             }
         }
+        scene4PositiveV.addEventListener("ended", function () {
+            console.log("end of scene4");
+        });
+        scene4NegativeV.addEventListener("ended", function () {
+            console.log("end of scene4");
+        });
     }
     //gibt Koordinaten der ersten touchpoints wieder
     function handleTouchstart(e) {
@@ -297,7 +308,7 @@ var NatureReloaded;
                 answer = "No";
                 //  console.log(answer);
             }
-            else {
+            else if (diffX < 0) {
                 // swiped right
                 console.log("swiped right");
                 answer = "Yes";
@@ -306,7 +317,7 @@ var NatureReloaded;
         }
     }
     function changeAtmo() {
-        console.log("test");
+        console.log("change Atmo");
         if (lastA == true) {
             atmoGreen.volume += 0.1;
             atmoRed.volume -= 0.1;
@@ -341,7 +352,7 @@ var NatureReloaded;
         pauseIcon.style.display = "none";
         playIcon.style.display = "block";
         let clickPlay = false;
-        let audiosPaused = [];
+        audiosPaused = [];
         let pausedAudio;
         let currentAudio;
         //iterate through array of all audios and pause current audio playing
@@ -351,9 +362,7 @@ var NatureReloaded;
                 currentAudio.pause();
                 //push currentAudio in audiosPaused
                 audiosPaused.push(currentAudio);
-            } /*else {
-                console.log("audio", currentAudio, "not playing right now");
-            }*/
+            }
         }
         //wait for user to click play again
         clickPlay = await waitForClickPlay();
@@ -366,8 +375,6 @@ var NatureReloaded;
             if (clickPlay == true) {
                 console.log("continue ", pausedAudio);
                 pausedAudio.play();
-                //delete pausedAudio from audiosPaused, cause it's not paused anymore
-                audiosPaused.splice(0, 1, pausedAudio);
             }
         }
     }
