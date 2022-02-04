@@ -57,6 +57,14 @@ body {
     display: block;
 }
 
+.concept {
+    display: block;
+}
+
+.prototyp {
+    display: block;
+}
+
 .pictures {
     display: block;
     margin-left: auto;
