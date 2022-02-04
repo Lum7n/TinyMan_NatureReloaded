@@ -6,17 +6,22 @@ var NatureReloaded;
     let a = 0;
     //sets impact of last answer the user gave 
     //a-=1 -> lastA = false/ a+=1 -> lastA = true
-    let lastA = true;
+    let lastA;
     //swipe left = no/false, swipe right = yes/true
-    let answer;
+    //answer can't be a boolean because true/false can't be overwritten with something else
+    //--> if the user touches the screen by mistake (and doesn't swipe) it will give back the value that was assigned before 
+    //with a string answer can be "reset" before every new question
+    let answer = "undefined";
     //start-coordinates of touch
     let initialX = null;
     let initialY = null;
+    let currentX;
+    let currentY;
+    let diffX;
+    let diffY;
     //atmos
     let atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-    let atmoGreenV = 0.5;
     let atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
-    let atmoRedV = 0.5;
     //all audio clips 
     let prologue1Q = new Audio("./audios/prologue+question_placeh.ogg");
     let prologueAnswerYes = new Audio("./audios/prologue_answerYes_placeh.ogg");
@@ -33,17 +38,21 @@ var NatureReloaded;
     let scene3AnswerNo = new Audio("./audios/scene3_answerNo_placeh.ogg");
     let scene4PositiveV = new Audio("./audios/scene4_positiveSide_placeh.ogg");
     let scene4NegativeV = new Audio("./audios/scene4_negativeSide_placeh.ogg");
-    //  let allAudio: HTMLCollectionOf<HTMLAudioElement>;
+    //all Audios
+    let allAudios = [atmoGreen, atmoRed, prologue1Q, prologueAnswerYes, prologueAnswerNo,
+        prologue2, scene2Q, scene2AnswerYes, scene2AnswerNo, scene3Q1, scene3PositiveVQ2, scene3NegativeVQ2,
+        scene3BothVQ2, scene3AnswerYes, scene3AnswerNo, scene4PositiveV, scene4NegativeV];
     //Start-Buttons
     let startButton;
     let buttonTipp1;
     let buttonTipp2;
     let buttonWarning;
-    //Pause/Play-Imgs
+    //Imgs
+    let logo;
     let playIcon;
     let pauseIcon;
     function handleLoad() {
-        // let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
+        logo = document.querySelector("#logo");
         startButton = document.querySelector("#startButton");
         buttonTipp1 = document.querySelector("#tipp1");
         buttonTipp2 = document.querySelector("#tipp2");
@@ -51,12 +60,17 @@ var NatureReloaded;
         playIcon = document.querySelector("#playIcon");
         pauseIcon = document.querySelector("#pauseIcon");
         startButton.addEventListener("click", handleStart);
-        //  playIcon.addEventListener("click", handlePlayPause);
-        // pauseIcon.addEventListener("click", handlePlayPause);
-        document.addEventListener("touchstart", startTouch, false);
+        pauseIcon.addEventListener("click", handlePlayPause);
+        document.addEventListener("touchstart", handleTouchstart, false);
         document.addEventListener("touchmove", handleTouchmove, false);
-        document.addEventListener("touchend", endTouch);
-        answer = endTouch();
+        hideLogo();
+    }
+    function hideLogo() {
+        logo.style.opacity = "0";
+        logo.addEventListener("transitionend", function () {
+            logo.remove();
+            startButton.style.display = "block";
+        });
     }
     function handleStart() {
         startButton.style.display = "none";
@@ -84,9 +98,16 @@ var NatureReloaded;
         prologue1Q.play();
         console.log("startPrologue");
         console.log("wait for user to swipe");
-        answer = await myPromiseGenerator();
-        console.log(answer);
-        if (answer === true) {
+        answer = await waitForTouchend();
+        while (answer !== "Yes" && answer !== "No") {
+            console.log("answer is undefined: ", answer);
+            answer = await waitForTouchend();
+        }
+        console.log("answer: ", answer);
+        if (answer === "Yes") {
+            //need to solve problem for overlapping audios if user swipes too early
+            //  if (prologue1Q.paused) {}  --> doesn't work, code jumps to vibrate() when swiping too early
+            // .addEventlistener("ended") --> does work, but if the user actually waits long enough the next audio won't play
             console.log("answer: yes");
             prologueAnswerYes.play();
             prologueAnswerYes.addEventListener("ended", function () {
@@ -94,7 +115,8 @@ var NatureReloaded;
                 prologue2.play();
             });
         }
-        else {
+        else if (answer === "No") {
+            //  if (prologue1Q.paused) {}
             console.log("answer: no");
             prologueAnswerNo.play();
             prologueAnswerNo.addEventListener("ended", function () {
@@ -105,93 +127,129 @@ var NatureReloaded;
         prologue2.addEventListener("ended", playS2Hunting);
     }
     async function playS2Hunting() {
-        atmoGreen.play();
+        answer = "undefined";
         atmoGreen.volume = 0.5;
-        console.log("start AtmoGreen at:", atmoGreen.volume);
-        atmoRed.play();
+        atmoGreen.play();
+        console.log("start AtmoGreen at: ", atmoGreen.volume);
         atmoRed.volume = 0.5;
-        console.log("start AtmoRed at:", atmoRed.volume);
+        atmoRed.play();
+        console.log("start AtmoRed at: ", atmoRed.volume);
         scene2Q.addEventListener("ended", vibrate);
         scene2Q.play();
         console.log("start scene2 + Q");
         console.log("wait for user to swipe");
-        answer = await myPromiseGenerator();
-        console.log(answer);
-        if (answer == true) {
-            scene2AnswerYes.play();
-            a += 1;
-            lastA = true;
-            changeAtmo();
-            console.log("answer: yes", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+        answer = await waitForTouchend();
+        while (answer !== "No" && answer !== "Yes") {
+            console.log("answer is undefined: ", answer);
+            answer = await waitForTouchend();
+        }
+        console.log("answer: ", answer);
+        if (answer === "Yes") {
+            scene2Q.addEventListener("ended", function () {
+                scene2AnswerYes.play();
+                a += 1;
+                lastA = true;
+                changeAtmo();
+                console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
+            });
             scene2AnswerYes.addEventListener("ended", function () {
                 console.log("end of scene2");
-                playS3SafeEnergy();
+                playS3SafeEnergy1();
             });
         }
-        else {
-            scene2AnswerNo.play();
-            a -= 1;
-            lastA = false;
-            changeAtmo();
-            console.log("answer: no", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+        else if (answer === "No") {
+            scene2Q.addEventListener("ended", function () {
+                scene2AnswerNo.play();
+                a -= 1;
+                lastA = false;
+                changeAtmo();
+                console.log("answer: no", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
+            });
             scene2AnswerNo.addEventListener("ended", function () {
                 console.log("end of scene2");
-                playS3SafeEnergy();
+                playS3SafeEnergy1();
             });
         }
     }
-    async function playS3SafeEnergy() {
+    async function playS3SafeEnergy1() {
+        answer = "undefined";
         scene3Q1.addEventListener("ended", vibrate);
         scene3Q1.play();
         console.log("start Scene 3 + Q");
         console.log("wait for user to swipe");
-        answer = await myPromiseGenerator();
-        console.log(answer);
-        if (answer == true) {
+        answer = await waitForTouchend();
+        while (answer !== "No" && answer !== "Yes") {
+            console.log("answer is undefined: ", answer);
+            answer = await waitForTouchend();
+        }
+        console.log("answer: ", answer);
+        if (answer === "Yes") {
             a += 1;
             lastA = true;
-            console.log("answer: yes", "a:", a, "lastA:", lastA, "no AtmoChange");
+            changeAtmo();
+            console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGreen: ", atmoGreen.volume, "atmoRed: ", atmoRed.volume);
         }
-        else {
+        else if (answer === "No") {
             a -= 1;
             lastA = false;
-            console.log("answer: yes", "a:", a, "lastA:", lastA, "noAtmoChange");
+            changeAtmo();
+            console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGreen: ", atmoGreen.volume, "atmoRed: ", atmoRed.volume);
         }
-        if (a < 0) {
-            scene3NegativeVQ2.addEventListener("ended", vibrate);
-            console.log("play scene3 Negative Version + Q");
-            scene3NegativeVQ2.play();
-        }
-        else if (a > 0) {
-            scene3PositiveVQ2.addEventListener("ended", vibrate);
-            console.log("play scene3 Positive Version + Q");
-            scene3PositiveVQ2.play();
-        }
-        else {
-            scene3BothVQ2.addEventListener("ended", vibrate);
-            console.log("play scene3 Both Versions + Q");
-            scene3BothVQ2.play();
-        }
+        scene3Q1.addEventListener("ended", function () {
+            if (a < 0) {
+                scene3NegativeVQ2.addEventListener("ended", vibrate);
+                console.log("play scene3 Negative Version + Q");
+                scene3NegativeVQ2.play();
+                scene3NegativeVQ2.addEventListener("ended", function () {
+                    playS3SafeEnergy2();
+                });
+            }
+            else if (a > 0) {
+                scene3PositiveVQ2.addEventListener("ended", vibrate);
+                console.log("play scene3 Positive Version + Q");
+                scene3PositiveVQ2.play();
+                scene3PositiveVQ2.addEventListener("ended", function () {
+                    playS3SafeEnergy2();
+                });
+            }
+            else {
+                scene3BothVQ2.addEventListener("ended", vibrate);
+                console.log("play scene3 Both Versions + Q");
+                scene3BothVQ2.play();
+                scene3BothVQ2.addEventListener("ended", function () {
+                    playS3SafeEnergy2();
+                });
+            }
+        });
+    }
+    //it's easier to define a new function playS3SafeEnergy2 and call it when hte audio before has ended...
+    //then to write six ended-triggers for the following audio
+    async function playS3SafeEnergy2() {
+        answer = "undefined";
         console.log("wait for user to swipe");
-        answer = await myPromiseGenerator();
-        console.log(answer);
-        if (answer == true) {
+        answer = await waitForTouchend();
+        while (answer !== "Yes" && answer != "No") {
+            console.log("answer is undefined: ", answer);
+            answer = await waitForTouchend();
+        }
+        console.log("answer: ", answer);
+        if (answer === "Yes") {
             scene3AnswerYes.play();
             a -= 1;
             lastA = false;
             changeAtmo();
-            console.log("answer: yes", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            console.log("answer: yes", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
             scene3AnswerYes.addEventListener("ended", function () {
                 console.log("end of scene3");
                 playS4Cutscene();
             });
         }
-        else {
+        else if (answer === "No") {
             scene3AnswerNo.play();
             a += 1;
             lastA = true;
             changeAtmo();
-            console.log("answer: no", "a:", a, "lastA:", lastA, "atmoGrenn:", atmoGreen.volume, "atmoRed:", atmoRed);
+            console.log("answer: no", "a: ", a, "lastA: ", lastA, "atmoGrenn: ", atmoGreen.volume, "atmoRed: ", atmoRed);
             scene3AnswerNo.addEventListener("ended", function () {
                 console.log("end of scene3");
                 playS4Cutscene();
@@ -220,37 +278,35 @@ var NatureReloaded;
         }
     }
     //gibt Koordinaten der ersten touchpoints wieder
-    function startTouch(e) {
+    function handleTouchstart(e) {
         initialX = e.touches[0].clientX;
         initialY = e.touches[0].clientY;
         console.log(initialX, initialY, e.touches[0]);
     }
+    //get swipe left/right -> set answer
     function handleTouchmove(e) {
-        let currentX = e.touches[0].clientX;
-        let currentY = e.touches[0].clientY;
-        let diffX = initialX - currentX;
-        let diffY = initialY - currentY;
+        currentX = e.touches[0].clientX;
+        currentY = e.touches[0].clientY;
+        diffX = initialX - currentX;
+        diffY = initialY - currentY;
         if (Math.abs(diffX) > Math.abs(diffY)) {
             // sliding horizontally
             if (diffX > 0) {
                 // swiped left
                 console.log("swiped left");
-                answer = false;
+                answer = "No";
                 //  console.log(answer);
             }
             else {
                 // swiped right
                 console.log("swiped right");
-                answer = true;
+                answer = "Yes";
                 //console.log(answer);
             }
         }
     }
-    function endTouch() {
-        console.log(answer);
-        return answer;
-    }
     function changeAtmo() {
+        console.log("test");
         if (lastA == true) {
             atmoGreen.volume += 0.1;
             atmoRed.volume -= 0.1;
@@ -271,19 +327,57 @@ var NatureReloaded;
         }
         navigator.vibrate(1000);
     }
-    async function myPromiseGenerator() {
+    //wait for user to end touch
+    async function waitForTouchend() {
         return new Promise((resolve) => {
             document.addEventListener("touchend", function () {
                 resolve(answer);
             }, { once: true });
         });
     }
-    /*   function handlePlayPause(): void {
-       allAudio = document.getElementsByTagName("audio");
-       console.log(allAudio);
-       pauseIcon.style.display = "none";
-       playIcon.style.display = "block";
- 
-   }*/
+    //play/pause audio currently playing
+    async function handlePlayPause() {
+        console.log("pause!");
+        pauseIcon.style.display = "none";
+        playIcon.style.display = "block";
+        let clickPlay = false;
+        let audiosPaused = [];
+        let pausedAudio;
+        let currentAudio;
+        //iterate through array of all audios and pause current audio playing
+        for (currentAudio of allAudios) {
+            if (!currentAudio.paused) {
+                console.log("currentAudio playing:", currentAudio);
+                currentAudio.pause();
+                //push currentAudio in audiosPaused
+                audiosPaused.push(currentAudio);
+            } /*else {
+                console.log("audio", currentAudio, "not playing right now");
+            }*/
+        }
+        //wait for user to click play again
+        clickPlay = await waitForClickPlay();
+        console.log("did user click play again?: ", clickPlay);
+        pauseIcon.style.display = "block";
+        playIcon.style.display = "none";
+        //iterate through pausedAudios to play them again
+        for (pausedAudio of audiosPaused) {
+            //if user clicked play, play audio that was paused before
+            if (clickPlay == true) {
+                console.log("continue ", pausedAudio);
+                pausedAudio.play();
+                //delete pausedAudio from audiosPaused, cause it's not paused anymore
+                audiosPaused.splice(0, 1, pausedAudio);
+            }
+        }
+    }
+    //wait for user to click play again
+    async function waitForClickPlay() {
+        return new Promise((resolve) => {
+            playIcon.addEventListener("click", function () {
+                resolve(true);
+            }, { once: true });
+        });
+    }
 })(NatureReloaded || (NatureReloaded = {}));
 //# sourceMappingURL=natureReloaded.js.map

@@ -10,22 +10,30 @@ namespace WaitforSwipe {
     let prologueAnswerNo: HTMLAudioElement = new Audio("prologue_answerNo_placeh.ogg");
     let prologue2: HTMLAudioElement = new Audio("rest_of_prologue_placeh.ogg");
     let answer: boolean;
+
+    let allAudios: HTMLAudioElement[] = [prologue1Q, prologueAnswerYes, prologueAnswerNo,
+        prologue2];
     //start-coordinates of touch
     let initialX: any = null;
     let initialY: any = null;
+
+    let playIcon: HTMLImageElement;
+    let pauseIcon: HTMLImageElement;
+
 
     function handleLoad(): void {
 
         // let body: HTMLBodyElement = <HTMLBodyElement>document.querySelector("body");
         startButton = <HTMLButtonElement>document.querySelector("#startButton");
         startButton.addEventListener("click", playS1Prologue);
-        //  playIcon.addEventListener("click", handlePlayPause);
-        // pauseIcon.addEventListener("click", handlePlayPause);
+        playIcon = <HTMLImageElement>document.querySelector("#playIcon");
+        pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
+
+        pauseIcon.addEventListener("click", handlePlayPause);
 
         document.addEventListener("touchstart", startTouch, false);
         document.addEventListener("touchmove", handleTouchmove, false);
-        document.addEventListener("touchend", endTouch);
-        //answer = endTouch();
+    
     }
 
 
@@ -35,29 +43,35 @@ namespace WaitforSwipe {
         prologue1Q.play();
         prologue1Q.addEventListener("ended", vibrate);
 
-        while (true) {
-            console.log("Hello there");
-            let answer: boolean = await myPromiseGenerator();
-            console.log(answer);
 
-            if (answer == true) {
-                prologueAnswerYes.play();
-                console.log("audio answer yes");
-                prologueAnswerYes.addEventListener("ended", function (): void {
-                    prologue2.play();
-                });
-            } else {
-                prologueAnswerNo.play();
-                console.log("audio answer no");
-                prologueAnswerNo.addEventListener("ended", function (): void {
-                    prologue2.play();
-                });
-            }
+        console.log("Hello there");
+        let answer: boolean = await myPromiseGenerator();
 
-            console.log("rest of prologue");
-            prologue2.addEventListener("ended", playS2Hunting);
-            console.log("End of prologue");
+        while (answer == undefined) {
+            console.log("answer is undefined: ", answer);
+            answer = await myPromiseGenerator();
         }
+
+        console.log("answer: ", answer);
+
+        if (answer == true) {
+            prologueAnswerYes.play();
+            console.log("audio answer yes");
+            prologueAnswerYes.addEventListener("ended", function (): void {
+                prologue2.play();
+            });
+        } else {
+            prologueAnswerNo.play();
+            console.log("audio answer no");
+            prologueAnswerNo.addEventListener("ended", function (): void {
+                prologue2.play();
+            });
+        }
+
+        console.log("rest of prologue");
+        prologue2.addEventListener("ended", playS2Hunting);
+        console.log("End of prologue");
+
     }
 
     function playS2Hunting(): void {
@@ -114,9 +128,51 @@ namespace WaitforSwipe {
         }
     }
 
-    function endTouch(): boolean {
+    /*function endTouch(): boolean {
         // console.log(answer);
         return answer;
+    }*/
+
+    async function handlePlayPause(): Promise<void> {
+        pauseIcon.style.display = "none";
+        playIcon.style.display = "block";
+        let clickPlay: boolean = false;
+
+        for (let currentAudio of allAudios) {
+            if (!currentAudio.paused) {
+                console.log("currentAudio playing:", currentAudio);
+                currentAudio.pause();
+                clickPlay = await clickPlayPromise();
+                console.log(clickPlay);
+                if (clickPlay == true) {
+                    console.log("continue ", currentAudio);
+                    currentAudio.play();
+                    pauseIcon.style.display = "block";
+                    playIcon.style.display = "none";
+
+                }
+                console.log("continue ", currentAudio);
+                currentAudio.play();
+                pauseIcon.style.display = "block";
+                playIcon.style.display = "none";
+
+
+            } else {
+                console.log("no audio playing right now");
+            }
+        }
+
+
+    }
+
+    async function clickPlayPromise(): Promise<boolean> {
+
+        return new Promise((resolve) => {
+            playIcon.addEventListener("click", function (e): void {
+                resolve(true);
+
+            }, { once: true });
+        });
     }
 
 

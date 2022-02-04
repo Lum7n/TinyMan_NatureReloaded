@@ -1,0 +1,12 @@
+#playIcon{
+    width: 5%;
+    display: none;
+    cursor: pointer;
+
+}
+#pauseIcon{
+    width: 5%;
+    display: block;
+    cursor: pointer;
+
+}
