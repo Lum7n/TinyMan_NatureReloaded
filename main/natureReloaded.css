@@ -40,14 +40,19 @@ button{
     width: 5%;
     display: none;
     cursor: pointer;
-
+    margin-left: 88%;
 }
 
 #playIcon{
-    width: 5%;
+    width: 88%;
     display: none;
     cursor: pointer;
 
+}
+#loadButton{
+    width: 5%;
+    display: none;
+    cursor: pointer;
 }
 
 #logo{
