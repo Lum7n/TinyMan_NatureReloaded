@@ -92,6 +92,7 @@ a:visited {
     position: relative;
     width: 12%;
     top: 2px;
+    cursor: pointer;
 }
 
 #speakerRight_i {
@@ -100,12 +101,14 @@ a:visited {
     top: 2px;
     left: 73%;
     transform: rotate(180deg);
+    cursor: pointer;
 }
 
 #speakerLeft_c {
     position: relative;
     width: 12%;
     top: 2px;
+    cursor: pointer;
 }
 
 #speakerRight_c {
@@ -114,6 +117,7 @@ a:visited {
     top: 2px;
     left: 73%;
     transform: rotate(180deg);
+    cursor: pointer;
 }
 
 #youDecide {
