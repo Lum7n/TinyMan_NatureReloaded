@@ -49,8 +49,8 @@ body {
 
 }
 
-#logo {
-    padding: 0% 20% 10% 20%;
+.logo {
+    padding: 2% 20% 2% 20%;
 }
 
 .idea {
@@ -89,13 +89,27 @@ a:visited {
     width: 85%;
 }
 
-#speaker_left {
+#speakerLeft_i {
     position: relative;
     width: 12%;
     top: 2px;
 }
 
-#speaker_right {
+#speakerRight_i {
+    position: relative;
+    width: 12%;
+    top: 2px;
+    left: 73%;
+    transform: rotate(180deg);
+}
+
+#speakerLeft_c {
+    position: relative;
+    width: 12%;
+    top: 2px;
+}
+
+#speakerRight_c {
     position: relative;
     width: 12%;
     top: 2px;
@@ -112,14 +126,15 @@ a:visited {
     font-size: medium;
 }
 
-#grundaufbau{
+#grundaufbau {
     display: block;
     margin-left: auto;
     margin-right: auto;
     padding: 5% 0%;
     width: 50%;
 }
-button{
+
+button {
     text-align: center;
     padding: 15px 25px;
     font-size: 30px;
@@ -131,21 +146,28 @@ button{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;
+    margin-top: 2%;
 }
 
-.reiter{
-    text-align: center;
-    padding: 15px 25px;
-    font-size: 30px;
-    cursor: pointer;
-    font-family: inherit;
-    border-radius: 25px;
-    background-color: #e2dd96;
-    box-shadow: 0 4px #999;
-    display: inline;
+.mainButtons {
+    display: inline-block;
+    margin: 2% 2% 0% 2%;
+}
+
+.reiter {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;
- 
+    padding: 0% 7.4% 2% 7.4%;
+    width: 85%;
+    margin-top: 4%;
 }
+
+div.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background-color: #c8d881;
+    border: 2px solid #a07d3b;
+    border-radius: 10px;
+  }

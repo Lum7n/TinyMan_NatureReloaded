@@ -6,6 +6,8 @@ namespace Tag_der_Medien {
     let conceptButton: HTMLButtonElement;
     let prototypButton: HTMLButtonElement;
 
+    let style: HTMLStyleElement = <HTMLStyleElement>document.createElement("style");
+
     function handleLoad(): void {
     
         console.log("script");
@@ -20,6 +22,17 @@ namespace Tag_der_Medien {
         prototypButton = <HTMLButtonElement>document.getElementById("prototypButton");
         prototypButton.addEventListener("click", handlePrototyp);
 
+        let speakerLeftI: HTMLImageElement = <HTMLImageElement>document.getElementById("speakerLeft_i");
+        speakerLeftI.addEventListener("click", playPositiveAtmo);
+
+        let speakerRightI: HTMLImageElement = <HTMLImageElement>document.getElementById("speakerRight_i");
+        speakerRightI.addEventListener("click", playNegativeAtmo);
+        
+        let speakerLeftC: HTMLImageElement = <HTMLImageElement>document.getElementById("speakerLeft_c");
+        speakerLeftC.addEventListener("click", playPositiveAtmo);
+
+        let speakerRightC: HTMLImageElement = <HTMLImageElement>document.getElementById("speakerRight_c");
+        speakerRightC.addEventListener("click", playNegativeAtmo);
     }
 
     function backgroundSize(): void {
@@ -32,8 +45,6 @@ namespace Tag_der_Medien {
 
         let css: string = ".block_1:after{ height: " + heightContent + "px }";
         console.log(css);
-
-        let style: HTMLStyleElement = <HTMLStyleElement>document.createElement("style");
 
         style.appendChild(document.createTextNode(css));
 
@@ -51,6 +62,8 @@ namespace Tag_der_Medien {
 
         let prototypDiv: HTMLDivElement = <HTMLDivElement>document.querySelector(".prototyp");
         prototypDiv.style.display = "none";
+
+        backgroundSize();
     }
 
     function handleConcept(): void {
@@ -64,6 +77,8 @@ namespace Tag_der_Medien {
 
         let prototypDiv: HTMLDivElement = <HTMLDivElement>document.querySelector(".prototyp");
         prototypDiv.style.display = "none";
+
+        backgroundSize();
     }
 
     function handlePrototyp(): void {
@@ -77,5 +92,21 @@ namespace Tag_der_Medien {
 
         let prototypDiv: HTMLDivElement = <HTMLDivElement>document.querySelector(".prototyp");
         prototypDiv.style.display = "block";
+
+        backgroundSize();
+    }
+
+    function playPositiveAtmo(): void {
+        console.log("Heile Welt!");
+
+        // let positiveAtmo: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
+        // positiveAtmo.play();
+    }
+
+    function playNegativeAtmo(): void {
+        console.log("Zerstörte Natur!");
+
+        // let negativeAtmo: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
+        // negativeAtmo.play();
     }
 }
