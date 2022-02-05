@@ -420,7 +420,7 @@ namespace NatureReloaded {
     async function handlePlayPause(): Promise<void> {
         console.log("pause!");
         pauseIcon.style.display = "none";
-        playIcon.style.display = "block";
+        playIcon.style.display = "inline";
         let clickPlay: boolean = false;
         audiosPaused = [];
         let pausedAudio: HTMLAudioElement;

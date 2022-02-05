@@ -369,7 +369,7 @@ var NatureReloaded;
     async function handlePlayPause() {
         console.log("pause!");
         pauseIcon.style.display = "none";
-        playIcon.style.display = "block";
+        playIcon.style.display = "inline";
         let clickPlay = false;
         audiosPaused = [];
         let pausedAudio;
