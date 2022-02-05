@@ -63,6 +63,10 @@ var NatureReloaded;
         loadPage = document.querySelector("#loadButton");
         startButton.addEventListener("click", handleStart);
         pauseIcon.addEventListener("click", handlePlayPause);
+        loadPage.addEventListener("click", function () {
+            window.location.reload();
+            //  return false();
+        });
         document.addEventListener("touchstart", handleTouchstart, false);
         document.addEventListener("touchmove", handleTouchmove, false);
         hideLogo();
@@ -94,7 +98,7 @@ var NatureReloaded;
     function hideWarning() {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "inline";
-        //  loadPage.style.display = "inline";
+        loadPage.style.display = "inline";
         playS1Prologue();
     }
     async function playS1Prologue() {

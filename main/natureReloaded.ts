@@ -77,6 +77,10 @@ namespace NatureReloaded {
 
         startButton.addEventListener("click", handleStart);
         pauseIcon.addEventListener("click", handlePlayPause);
+        loadPage.addEventListener("click", function (): void {
+        window.location.reload();
+      //  return false();
+        });
 
         document.addEventListener("touchstart", handleTouchstart, false);
         document.addEventListener("touchmove", handleTouchmove, false);
@@ -116,7 +120,7 @@ namespace NatureReloaded {
     function hideWarning(): void {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "inline";
-      //  loadPage.style.display = "inline";
+        loadPage.style.display = "inline";
 
         playS1Prologue();
     }
