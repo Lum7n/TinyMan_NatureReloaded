@@ -26,11 +26,6 @@ body{
     z-index:1;
     margin: 0;
     position: absolute;
-    /* top: 50px;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    text-align: justify;
-    max-height: fit-content; */
 }
 
 button{
@@ -59,7 +54,6 @@ button{
 }
 
 #tipp2{
-
     display: none;
 }
 
@@ -95,7 +89,9 @@ button{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20%;
+ 
     transition: opacity 4s;
+
     width: 50%;
     height: 50%;
 }
