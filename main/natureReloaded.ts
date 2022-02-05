@@ -27,21 +27,21 @@ namespace NatureReloaded {
     let atmoRed: HTMLAudioElement = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
 
     //all audio clips 
-    let prologue1Q: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
-    let prologueAnswerYes: HTMLAudioElement = new Audio("./audios/prologue_answerYes_placeh.ogg");
-    let prologueAnswerNo: HTMLAudioElement = new Audio("./audios/prologue_answerNo_placeh.ogg");
-    let prologue2: HTMLAudioElement = new Audio("./audios/rest_of_prologue_placeh.ogg");
+    let prologue1Q: HTMLAudioElement = new Audio("./audios/S1_Frage1.mp3");
+    let prologueAnswerYes: HTMLAudioElement = new Audio("./audios/S1_Reaktion_ja.mp3");
+    let prologueAnswerNo: HTMLAudioElement = new Audio("./audios/S1_Reaktion_nein.mp3");
+    let prologue2: HTMLAudioElement = new Audio("./audios/S1_Outro.mp3");
 
-    let scene2Q: HTMLAudioElement = new Audio("./audios/scene2+question_placeh.ogg");
-    let scene2AnswerYes: HTMLAudioElement = new Audio("./audios/scene2_answerYes_placeh.ogg");
-    let scene2AnswerNo: HTMLAudioElement = new Audio("./audios/scene2_answerNo_placeh.ogg");
+    let scene2Q: HTMLAudioElement = new Audio("./audios/S2_s_Frage2.mp3");
+    let scene2AnswerYes: HTMLAudioElement = new Audio("./audios/S2_s_Reaktion_ja.mp3");
+    let scene2AnswerNo: HTMLAudioElement = new Audio("./audios/S2_s_Reaktion_nein.mp3");
 
-    let scene3Q1: HTMLAudioElement = new Audio("./audios/scene3+question1_placeh.ogg");
-    let scene3PositiveVQ2: HTMLAudioElement = new Audio("./audios/scene3_positiveArguments_placeh.ogg");
-    let scene3NegativeVQ2: HTMLAudioElement = new Audio("./audios/scene3_negativeArguments_placeh.ogg");
-    let scene3BothVQ2: HTMLAudioElement = new Audio("./audios/scene3_neutralArguments_placeh.ogg");
-    let scene3AnswerYes: HTMLAudioElement = new Audio("./audios/scene3_answerYes_placeh.ogg");
-    let scene3AnswerNo: HTMLAudioElement = new Audio("./audios/scene3_answerNo_placeh.ogg");
+    let scene3Q1: HTMLAudioElement = new Audio("./audios/S3_s_Frage3.mp3");
+    let scene3PositiveVQ2: HTMLAudioElement = new Audio("./audios/S3_s_Frage4_positiv.mp3");
+    let scene3NegativeVQ2: HTMLAudioElement = new Audio("./audios/S3_s_Frage4_negativ.mp3");
+    let scene3BothVQ2: HTMLAudioElement = new Audio("./audios/S3_s_Frage4_neutral.mp3");
+    let scene3AnswerYes: HTMLAudioElement = new Audio("./audios/S3_s_Reaktion_ja.mp3");
+    let scene3AnswerNo: HTMLAudioElement = new Audio("./audios/S3_s_Reaktion_nein.mp3");
 
     let scene4PositiveV: HTMLAudioElement = new Audio("./audios/scene4_positiveSide_placeh.ogg");
     let scene4NegativeV: HTMLAudioElement = new Audio("./audios/scene4_negativeSide_placeh.ogg");
