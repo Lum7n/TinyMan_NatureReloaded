@@ -26,10 +26,10 @@ body{
     z-index:1;
     margin: 0;
     position: absolute;
-    top: 50px;
+    /* top: 50px;
     left: 50%;
     transform: translate(-50%, 0%);
-    /* text-align: justify;
+    text-align: justify;
     max-height: fit-content; */
 }
 
