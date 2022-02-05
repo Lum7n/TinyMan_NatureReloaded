@@ -94,7 +94,7 @@ var NatureReloaded;
     function hideWarning() {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "inline";
-        loadPage.style.display = "inline";
+        //  loadPage.style.display = "inline";
         playS1Prologue();
     }
     async function playS1Prologue() {

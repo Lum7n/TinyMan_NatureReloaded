@@ -116,7 +116,7 @@ namespace NatureReloaded {
     function hideWarning(): void {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "inline";
-        loadPage.style.display = "inline";
+      //  loadPage.style.display = "inline";
 
         playS1Prologue();
     }
