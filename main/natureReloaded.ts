@@ -73,13 +73,28 @@ namespace NatureReloaded {
         buttonWarning = <HTMLButtonElement>document.querySelector("#warning");
         playIcon = <HTMLImageElement>document.querySelector("#playIcon");
         pauseIcon = <HTMLImageElement>document.querySelector("#pauseIcon");
-        loadPage = <HTMLImageElement>document.querySelector("#loadButton");
 
         startButton.addEventListener("click", handleStart);
         pauseIcon.addEventListener("click", handlePlayPause);
+
+        //load page when click on <-Button
+        loadPage = <HTMLImageElement>document.querySelector("#loadButton");
+
         loadPage.addEventListener("click", function (): void {
-        window.location.reload();
-      //  return false();
+            console.log("load page new");
+            window.location.reload();
+            //  return false();
+        });
+
+        atmoGreen.addEventListener("ended", function (): void {
+            console.log("loopatmoGreen");
+            this.currentTime = 0;
+            this.play();
+        });
+        atmoRed.addEventListener("ended", function (): void {
+            console.log("loop atmoRed");
+            this.currentTime = 0;
+            this.play();
         });
 
         document.addEventListener("touchstart", handleTouchstart, false);
@@ -121,7 +136,6 @@ namespace NatureReloaded {
         buttonWarning.style.display = "none";
         pauseIcon.style.display = "inline";
         loadPage.style.display = "inline";
-
         playS1Prologue();
     }
 

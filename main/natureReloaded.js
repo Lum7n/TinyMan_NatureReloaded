@@ -60,12 +60,24 @@ var NatureReloaded;
         buttonWarning = document.querySelector("#warning");
         playIcon = document.querySelector("#playIcon");
         pauseIcon = document.querySelector("#pauseIcon");
-        loadPage = document.querySelector("#loadButton");
         startButton.addEventListener("click", handleStart);
         pauseIcon.addEventListener("click", handlePlayPause);
+        //load page when click on <-Button
+        loadPage = document.querySelector("#loadButton");
         loadPage.addEventListener("click", function () {
+            console.log("load page new");
             window.location.reload();
             //  return false();
+        });
+        atmoGreen.addEventListener("ended", function () {
+            console.log("loopatmoGreen");
+            this.currentTime = 0;
+            this.play();
+        });
+        atmoRed.addEventListener("ended", function () {
+            console.log("loop atmoRed");
+            this.currentTime = 0;
+            this.play();
         });
         document.addEventListener("touchstart", handleTouchstart, false);
         document.addEventListener("touchmove", handleTouchmove, false);
