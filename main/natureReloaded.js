@@ -51,6 +51,7 @@ var NatureReloaded;
     let logo;
     let playIcon;
     let pauseIcon;
+    let loadPage;
     function handleLoad() {
         logo = document.querySelector("#logo");
         startButton = document.querySelector("#startButton");
@@ -61,6 +62,23 @@ var NatureReloaded;
         pauseIcon = document.querySelector("#pauseIcon");
         startButton.addEventListener("click", handleStart);
         pauseIcon.addEventListener("click", handlePlayPause);
+        //load page when click on <-Button
+        loadPage = document.querySelector("#loadButton");
+        loadPage.addEventListener("click", function () {
+            console.log("load page new");
+            window.location.reload();
+            //  return false();
+        });
+        atmoGreen.addEventListener("ended", function () {
+            console.log("loopatmoGreen");
+            this.currentTime = 0;
+            this.play();
+        });
+        atmoRed.addEventListener("ended", function () {
+            console.log("loop atmoRed");
+            this.currentTime = 0;
+            this.play();
+        });
         document.addEventListener("touchstart", handleTouchstart, false);
         document.addEventListener("touchmove", handleTouchmove, false);
         hideLogo();
@@ -91,7 +109,8 @@ var NatureReloaded;
     }
     function hideWarning() {
         buttonWarning.style.display = "none";
-        pauseIcon.style.display = "block";
+        pauseIcon.style.display = "inline";
+        loadPage.style.display = "inline";
         playS1Prologue();
     }
     async function playS1Prologue() {
@@ -367,7 +386,7 @@ var NatureReloaded;
         //wait for user to click play again
         clickPlay = await waitForClickPlay();
         console.log("did user click play again?: ", clickPlay);
-        pauseIcon.style.display = "block";
+        pauseIcon.style.display = "inline";
         playIcon.style.display = "none";
         //iterate through pausedAudios to play them again
         for (pausedAudio of audiosPaused) {

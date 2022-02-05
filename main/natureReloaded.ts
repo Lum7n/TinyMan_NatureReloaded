@@ -62,7 +62,7 @@ namespace NatureReloaded {
     let logo: HTMLImageElement;
     let playIcon: HTMLImageElement;
     let pauseIcon: HTMLImageElement;
-
+    let loadPage: HTMLImageElement;
 
     function handleLoad(): void {
 
@@ -76,6 +76,26 @@ namespace NatureReloaded {
 
         startButton.addEventListener("click", handleStart);
         pauseIcon.addEventListener("click", handlePlayPause);
+
+        //load page when click on <-Button
+        loadPage = <HTMLImageElement>document.querySelector("#loadButton");
+
+        loadPage.addEventListener("click", function (): void {
+            console.log("load page new");
+            window.location.reload();
+            //  return false();
+        });
+
+        atmoGreen.addEventListener("ended", function (): void {
+            console.log("loopatmoGreen");
+            this.currentTime = 0;
+            this.play();
+        });
+        atmoRed.addEventListener("ended", function (): void {
+            console.log("loop atmoRed");
+            this.currentTime = 0;
+            this.play();
+        });
 
         document.addEventListener("touchstart", handleTouchstart, false);
         document.addEventListener("touchmove", handleTouchmove, false);
@@ -114,8 +134,8 @@ namespace NatureReloaded {
 
     function hideWarning(): void {
         buttonWarning.style.display = "none";
-        pauseIcon.style.display = "block";
-
+        pauseIcon.style.display = "inline";
+        loadPage.style.display = "inline";
         playS1Prologue();
     }
 
@@ -413,13 +433,13 @@ namespace NatureReloaded {
                 currentAudio.pause();
                 //push currentAudio in audiosPaused
                 audiosPaused.push(currentAudio);
-            } 
+            }
         }
 
         //wait for user to click play again
         clickPlay = await waitForClickPlay();
         console.log("did user click play again?: ", clickPlay);
-        pauseIcon.style.display = "block";
+        pauseIcon.style.display = "inline";
         playIcon.style.display = "none";
 
         //iterate through pausedAudios to play them again

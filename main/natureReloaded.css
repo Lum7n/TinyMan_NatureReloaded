@@ -37,17 +37,25 @@ button{
 }
 
 #pauseIcon{
-    width: 5%;
+    width: 15%;
+    margin-left: 67%;
+    display: none;
+    cursor: pointer;
+  
+}
+
+#playIcon{
+    width: 15%;
+    margin-left: 88%;
     display: none;
     cursor: pointer;
 
 }
-
-#playIcon{
-    width: 5%;
+#loadButton{
+    width: 15%;
     display: none;
     cursor: pointer;
-
+    margin-left: 1%;
 }
 
 #logo{
