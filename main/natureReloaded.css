@@ -95,9 +95,7 @@ button{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20%;
- 
     transition: opacity 4s;
-
     width: 50%;
     height: 50%;
 }
