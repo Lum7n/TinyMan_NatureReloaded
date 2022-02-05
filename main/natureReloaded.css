@@ -24,7 +24,7 @@ body{
 .main {
     color:#000000;
     z-index:1;
-    width: 100%;
+    width: 92%;
     position: absolute;
 }
 
@@ -86,7 +86,7 @@ button{
 #logo{
     border-radius: 25px;
     margin-top: 20%;
-
+    margin-left: 10%;
  
     transition: opacity 4s;
 
