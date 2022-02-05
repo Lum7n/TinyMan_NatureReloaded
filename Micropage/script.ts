@@ -19,6 +19,7 @@ namespace Tag_der_Medien {
 
         prototypButton = <HTMLButtonElement>document.getElementById("prototypButton");
         prototypButton.addEventListener("click", handlePrototyp);
+
     }
 
     function backgroundSize(): void {
