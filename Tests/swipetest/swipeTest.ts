@@ -17,7 +17,6 @@ namespace SwipeTest {
         document.addEventListener("touchend", endTouch);
     }
 
-
     //gibt Koordinaten des touchpoints wieder
     function startTouch(e: any): void {
         initialX = e.touches[0].clientX;

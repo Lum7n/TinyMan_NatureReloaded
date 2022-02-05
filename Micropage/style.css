@@ -111,3 +111,11 @@ a:visited {
     position: absolute;
     font-size: medium;
 }
+
+#grundaufbau{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5% 0%;
+    width: 50%;
+}
