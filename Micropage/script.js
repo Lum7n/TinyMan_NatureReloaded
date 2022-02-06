@@ -30,8 +30,17 @@ var Micropage;
     function backgroundSize() {
         let mainContent = document.querySelector(".main");
         let heightContent = mainContent.offsetHeight;
+        let widthContent = mainContent.offsetWidth;
+        let reiterDiv = document.querySelector(".reiter");
+        let reiterWidth = reiterDiv.offsetWidth;
+        console.log("reiterW= " + reiterWidth);
+        console.log("w = " + widthContent);
+        let num = widthContent - reiterWidth;
+        num = num / 2;
+        reiterDiv.style.paddingLeft = num + "px";
+        reiterDiv.style.paddingRight = num + "px";
         heightContent = heightContent + 150;
-        console.log(heightContent);
+        console.log("h = " + heightContent);
         let css = ".block_1:after{ height: " + heightContent + "px }";
         console.log(css);
         style.appendChild(document.createTextNode(css));

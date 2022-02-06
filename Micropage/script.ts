@@ -44,8 +44,22 @@ namespace Micropage {
         let mainContent: HTMLElement = <HTMLElement>document.querySelector(".main");
         let heightContent: number = mainContent.offsetHeight;
 
+        let widthContent: number = mainContent.offsetWidth;
+
+        let reiterDiv: HTMLDivElement = <HTMLDivElement>document.querySelector(".reiter")
+        let reiterWidth: number = reiterDiv.offsetWidth;
+
+        console.log("reiterW= " + reiterWidth);
+        console.log("w = " + widthContent);
+
+        let num: number = widthContent - reiterWidth;
+        num = num / 2;
+
+        reiterDiv.style.paddingLeft = num + "px";
+        reiterDiv.style.paddingRight = num + "px";
+
         heightContent = heightContent + 150;
-        console.log(heightContent);
+        console.log("h = " + heightContent);
 
         let css: string = ".block_1:after{ height: " + heightContent + "px }";
         console.log(css);
