@@ -1,11 +1,14 @@
 "use strict";
-var Tag_der_Medien;
-(function (Tag_der_Medien) {
+var Micropage;
+(function (Micropage) {
     window.addEventListener("load", handleLoad);
     let ideaButton;
     let conceptButton;
     let prototypButton;
     let style = document.createElement("style");
+    let soundOn = false;
+    let positiveAtmo = new Audio("./Assets/Idee/Atmo_positiv.wav");
+    let negativeAtmo = new Audio("./Assets/Idee/Atmo_negativ.wav");
     function handleLoad() {
         console.log("script");
         backgroundSize();
@@ -65,14 +68,29 @@ var Tag_der_Medien;
         backgroundSize();
     }
     function playPositiveAtmo() {
-        console.log("Heile Welt!");
-        // let positiveAtmo: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
-        // positiveAtmo.play();
+        console.log("Heile Welt!" + soundOn);
+        if (!soundOn) {
+            console.log("text");
+            positiveAtmo.play();
+            soundOn = true;
+        }
+        else {
+            positiveAtmo.pause();
+            negativeAtmo.pause();
+            soundOn = false;
+        }
     }
     function playNegativeAtmo() {
         console.log("Zerstörte Natur!");
-        // let negativeAtmo: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
-        // negativeAtmo.play();
+        if (!soundOn) {
+            negativeAtmo.play();
+            soundOn = true;
+        }
+        else {
+            positiveAtmo.pause();
+            negativeAtmo.pause();
+            soundOn = false;
+        }
     }
-})(Tag_der_Medien || (Tag_der_Medien = {}));
+})(Micropage || (Micropage = {}));
 //# sourceMappingURL=script.js.map

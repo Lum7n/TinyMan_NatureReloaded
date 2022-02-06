@@ -1,4 +1,4 @@
-namespace Tag_der_Medien {
+namespace Micropage {
 
     window.addEventListener("load", handleLoad);
 
@@ -7,6 +7,10 @@ namespace Tag_der_Medien {
     let prototypButton: HTMLButtonElement;
 
     let style: HTMLStyleElement = <HTMLStyleElement>document.createElement("style");
+
+    let soundOn: boolean = false;
+    let positiveAtmo: HTMLAudioElement = new Audio("./Assets/Idee/Atmo_positiv.wav");
+    let negativeAtmo: HTMLAudioElement = new Audio("./Assets/Idee/Atmo_negativ.wav");
 
     function handleLoad(): void {
     
@@ -97,16 +101,35 @@ namespace Tag_der_Medien {
     }
 
     function playPositiveAtmo(): void {
-        console.log("Heile Welt!");
+        console.log("Heile Welt!" + soundOn);
 
-        // let positiveAtmo: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
-        // positiveAtmo.play();
+        if (!soundOn) {
+
+            console.log("text")
+            positiveAtmo.play();
+            soundOn = true; 
+
+        } else {
+
+            positiveAtmo.pause();
+            negativeAtmo.pause();
+            soundOn = false;
+        }
     }
 
     function playNegativeAtmo(): void {
         console.log("Zerstörte Natur!");
 
-        // let negativeAtmo: HTMLAudioElement = new Audio("./audios/prologue+question_placeh.ogg");
-        // negativeAtmo.play();
+        if (!soundOn) {
+
+            negativeAtmo.play();
+            soundOn = true; 
+
+        } else {
+
+            positiveAtmo.pause();
+            negativeAtmo.pause();
+            soundOn = false;
+        }
     }
 }

@@ -19,8 +19,8 @@ var NatureReloaded;
     let diffX;
     let diffY;
     //atmos
-    let atmoGreen = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-    let atmoRed = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoGreen = new Audio("./audios/Atmo_positiv_halb.wav");
+    let atmoRed = new Audio("./audios/Atmo_negativ_halb.wav");
     //all audio clips 
     let prologue1Q = new Audio("./audios/S1_Frage1.wav");
     let prologueAnswerYes = new Audio("./audios/S1_Reaktion_ja.wav");
@@ -35,8 +35,8 @@ var NatureReloaded;
     let scene3BothVQ2 = new Audio("./audios/S3_s_Frage4_neutral.wav");
     let scene3AnswerYes = new Audio("./audios/S3_s_Reaktion_ja.wav");
     let scene3AnswerNo = new Audio("./audios/S3_s_Reaktion_nein.wav");
-    let scene4PositiveV = new Audio("./audios/scene4_positiveSide_placeh.ogg");
-    let scene4NegativeV = new Audio("./audios/scene4_negativeSide_placeh.ogg");
+    let scene4PositiveV = new Audio("./audios/S4_s_positiv.wav");
+    let scene4NegativeV = new Audio("./audios/S4_s_negativ.wav");
     //all Audios
     let allAudios = [atmoGreen, atmoRed, prologue1Q, prologueAnswerYes, prologueAnswerNo,
         prologue2, scene2Q, scene2AnswerYes, scene2AnswerNo, scene3Q1, scene3PositiveVQ2, scene3NegativeVQ2,

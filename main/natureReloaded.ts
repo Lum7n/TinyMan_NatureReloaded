@@ -23,8 +23,8 @@ namespace NatureReloaded {
     let diffY: number;
 
     //atmos
-    let atmoGreen: HTMLAudioElement = new Audio("./audios/mixkit-natural-ambience-with-flowing-water-and-birds-61.wav");
-    let atmoRed: HTMLAudioElement = new Audio("./audios/mixkit-thunderstorm-in-the-forest-2396.wav");
+    let atmoGreen: HTMLAudioElement = new Audio("./audios/Atmo_positiv_halb.wav");
+    let atmoRed: HTMLAudioElement = new Audio("./audios/Atmo_negativ_halb.wav");
 
     //all audio clips 
     let prologue1Q: HTMLAudioElement = new Audio("./audios/S1_Frage1.wav");
@@ -43,8 +43,8 @@ namespace NatureReloaded {
     let scene3AnswerYes: HTMLAudioElement = new Audio("./audios/S3_s_Reaktion_ja.wav");
     let scene3AnswerNo: HTMLAudioElement = new Audio("./audios/S3_s_Reaktion_nein.wav");
 
-    let scene4PositiveV: HTMLAudioElement = new Audio("./audios/scene4_positiveSide_placeh.ogg");
-    let scene4NegativeV: HTMLAudioElement = new Audio("./audios/scene4_negativeSide_placeh.ogg");
+    let scene4PositiveV: HTMLAudioElement = new Audio("./audios/S4_s_positiv.wav");
+    let scene4NegativeV: HTMLAudioElement = new Audio("./audios/S4_s_negativ.wav");
 
     //all Audios
     let allAudios: HTMLAudioElement[] = [atmoGreen, atmoRed, prologue1Q, prologueAnswerYes, prologueAnswerNo,
