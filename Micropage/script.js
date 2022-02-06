@@ -12,6 +12,7 @@ var Micropage;
     function handleLoad() {
         console.log("script");
         backgroundSize();
+        reiterPadding();
         ideaButton = document.getElementById("ideaButton");
         ideaButton.addEventListener("click", handleIdea);
         conceptButton = document.getElementById("conceptButton");
@@ -30,6 +31,15 @@ var Micropage;
     function backgroundSize() {
         let mainContent = document.querySelector(".main");
         let heightContent = mainContent.offsetHeight;
+        heightContent = heightContent + 150;
+        console.log("h = " + heightContent);
+        let css = ".block_1:after{ height: " + heightContent + "px }";
+        console.log(css);
+        style.appendChild(document.createTextNode(css));
+        document.getElementsByTagName("head")[0].appendChild(style);
+    }
+    function reiterPadding() {
+        let mainContent = document.querySelector(".main");
         let widthContent = mainContent.offsetWidth;
         let reiterDiv = document.querySelector(".reiter");
         let reiterWidth = reiterDiv.offsetWidth;
@@ -39,12 +49,6 @@ var Micropage;
         num = num / 2;
         reiterDiv.style.paddingLeft = num + "px";
         reiterDiv.style.paddingRight = num + "px";
-        heightContent = heightContent + 150;
-        console.log("h = " + heightContent);
-        let css = ".block_1:after{ height: " + heightContent + "px }";
-        console.log(css);
-        style.appendChild(document.createTextNode(css));
-        document.getElementsByTagName("head")[0].appendChild(style);
     }
     function handleIdea() {
         console.log("Idee");

@@ -16,6 +16,7 @@ namespace Micropage {
     
         console.log("script");
         backgroundSize();
+        reiterPadding();
 
         ideaButton = <HTMLButtonElement>document.getElementById("ideaButton");
         ideaButton.addEventListener("click", handleIdea);
@@ -44,6 +45,20 @@ namespace Micropage {
         let mainContent: HTMLElement = <HTMLElement>document.querySelector(".main");
         let heightContent: number = mainContent.offsetHeight;
 
+        heightContent = heightContent + 150;
+        console.log("h = " + heightContent);
+
+        let css: string = ".block_1:after{ height: " + heightContent + "px }";
+        console.log(css);
+
+        style.appendChild(document.createTextNode(css));
+
+        document.getElementsByTagName("head")[0].appendChild(style);
+    }
+
+    function reiterPadding(): void {
+
+        let mainContent: HTMLElement = <HTMLElement>document.querySelector(".main");
         let widthContent: number = mainContent.offsetWidth;
 
         let reiterDiv: HTMLDivElement = <HTMLDivElement>document.querySelector(".reiter")
@@ -57,16 +72,6 @@ namespace Micropage {
 
         reiterDiv.style.paddingLeft = num + "px";
         reiterDiv.style.paddingRight = num + "px";
-
-        heightContent = heightContent + 150;
-        console.log("h = " + heightContent);
-
-        let css: string = ".block_1:after{ height: " + heightContent + "px }";
-        console.log(css);
-
-        style.appendChild(document.createTextNode(css));
-
-        document.getElementsByTagName("head")[0].appendChild(style);
     }
 
     function handleIdea(): void {
