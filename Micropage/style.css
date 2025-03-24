@@ -163,6 +163,7 @@ button {
     display: inline-block;
     margin: 2% 1% 0% 1%;
     padding: 15px 15px;
+    align-items: center;
 }
 
 .reiter {
